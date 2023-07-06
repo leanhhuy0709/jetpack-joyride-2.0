@@ -37,8 +37,14 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
 
     public constructor(scene: Phaser.Scene, x: number, y: number, key: string) {
         super(scene.matter.world, x, y, key)
-        this.setDisplaySize(140, 160)
-            .setRectangle(80, 150)
+        this.setDisplaySize(
+            (140 * scene.cameras.main.width) / 3200,
+            (160 * scene.cameras.main.width) / 3200
+        )
+            .setRectangle(
+                (80 * scene.cameras.main.width) / 3200,
+                (150 * scene.cameras.main.width) / 3200
+            )
             .setFixedRotation()
             .setCollisionGroup(-2)
             .setDepth(DEPTH.OBJECT_VERYHIGH)
@@ -55,9 +61,10 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         this.defaultSpeed = 0.5
         this.speed = this.defaultSpeed
         this.canFireBullet = true
+        this.jumpVelo = (DEFAULT_JUMP_VELO * this.scene.cameras.main.width) / 3200
 
         this.shadow = scene.add
-            .sprite(x, y + 200, IMAGE.SHADOW)
+            .sprite(x, y + (200 * scene.cameras.main.width) / 3200, IMAGE.SHADOW)
             .setDepth(DEPTH.OBJECT_MEDIUM)
             .setScale(3)
             .setAlpha(0)
@@ -106,7 +113,10 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
 
         this.bulletFlash = this.scene.add
             .sprite(0, 0, SPRITE.BULLET_FLASH)
-            .setDisplaySize(150, 150)
+            .setDisplaySize(
+                (150 * this.scene.cameras.main.width) / 3200,
+                (150 * this.scene.cameras.main.width) / 3200
+            )
             .setDepth(DEPTH.OBJECT_HIGH)
     }
 
@@ -159,9 +169,18 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         this.updateBullet(delta)
 
         this.shadow
-            .setPosition(this.x - 10, this.shadow.y)
-            .setAlpha((this.y - 320) / (1300 - 320))
-            .setScale((3 * (this.y - 320)) / (1300 - 320))
+            .setPosition(this.x - (10 * this.scene.cameras.main.width) / 3200, this.shadow.y)
+            .setAlpha(
+                (this.y - (320 * this.scene.cameras.main.width) / 3200) /
+                    980 /
+                    this.scene.cameras.main.width /
+                    3200
+            )
+            .setScale(
+                (((3 * ((this.y * 3200) / this.scene.cameras.main.width - 320)) / (1300 - 320)) *
+                    this.scene.cameras.main.width) /
+                    3200
+            )
             .setVisible(this.visible)
 
         for (let i = 0; i < this.equipments.length; i++) this.equipments[i].update(delta)
@@ -198,14 +217,22 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         }
         if (countRemovedExplosion > 0) this.explosions.splice(0, countRemovedExplosion)
 
-        this.bulletFlash.setPosition(this.x - 11, this.y + 135)
+        this.bulletFlash.setPosition(
+            this.x - (11 * this.scene.cameras.main.width) / 3200,
+            this.y + (135 * this.scene.cameras.main.width) / 3200
+        )
     }
 
     public fireBullet(): void {
         this.delayFire += 0.5
         if (this.delayFire >= DELAY_FIRE_BULLET) {
             this.bullets.push(
-                ObjectPool.getBullet(this.scene, this.x - 10, this.y + 95, IMAGE.BULLET)
+                ObjectPool.getBullet(
+                    this.scene,
+                    this.x - (10 * this.scene.cameras.main.width) / 3200,
+                    this.y + (95 * this.scene.cameras.main.width) / 3200,
+                    IMAGE.BULLET
+                )
             )
             this.delayFire -= DELAY_FIRE_BULLET
         }
