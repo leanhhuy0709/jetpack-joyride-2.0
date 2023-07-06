@@ -33,7 +33,7 @@ export default class ProductTexture {
 
         const name = scene.add
             .text((500 * scene.cameras.main.width) / 3200, 0, product.getName(), {
-                fontSize: '60px',
+                fontSize: (60 * this.scene.cameras.main.width) / 3200,
                 fontStyle: 'bold',
                 fontFamily: FONT_NAME,
             })
@@ -42,7 +42,7 @@ export default class ProductTexture {
 
         const price = scene.add
             .text(width - (500 * scene.cameras.main.width) / 3200, 0, String(product.getPrice()), {
-                fontSize: '60px',
+                fontSize: (60 * this.scene.cameras.main.width) / 3200,
                 fontStyle: 'bold',
                 fontFamily: FONT_NAME,
                 color: '#FFF0C8',
@@ -52,7 +52,7 @@ export default class ProductTexture {
 
         const description = scene.add
             .text(width / 2, 0, product.getDescription(), {
-                fontSize: '60px',
+                fontSize: (60 * this.scene.cameras.main.width) / 3200,
                 fontFamily: FONT_NAME,
             })
             .setStroke('#000000', (5 * scene.cameras.main.width) / 3200)
@@ -80,7 +80,7 @@ export default class ProductTexture {
             content,
             {
                 color: '#ffffff',
-                fontSize: '40px',
+                fontSize: 40*this.scene.cameras.main.width / 3200,
                 fontStyle: 'bold',
                 fontFamily: FONT_NAME,
             }

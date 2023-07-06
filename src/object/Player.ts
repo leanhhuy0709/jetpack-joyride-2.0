@@ -58,7 +58,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         this.scene.add.existing(this)
         this.createAnims(key)
 
-        this.defaultSpeed = 0.5
+        this.defaultSpeed = 0.5 *this.scene.cameras.main.width / 3200
         this.speed = this.defaultSpeed
         this.canFireBullet = true
         this.jumpVelo = (DEFAULT_JUMP_VELO * this.scene.cameras.main.width) / 3200

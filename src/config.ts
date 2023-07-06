@@ -13,7 +13,16 @@ export const GameConfig: Phaser.Types.Core.GameConfig = {
     version: '1.0',
     type: Phaser.AUTO,
     parent: 'game',
-    scene: [InitScene, LoadingScene, MenuScene, GamePlayScene, GameOverScene, ShopScene, PauseScene, SettingScene],
+    scene: [
+        InitScene,
+        LoadingScene,
+        MenuScene,
+        GamePlayScene,
+        GameOverScene,
+        ShopScene,
+        PauseScene,
+        SettingScene,
+    ],
     input: {
         keyboard: true,
     },
@@ -24,15 +33,14 @@ export const GameConfig: Phaser.Types.Core.GameConfig = {
                 y: 0.25,
             },
             debug: {
-                
                 showBody: false,
                 showStaticBody: false,
                 lineColor: 0xfc1200,
             },
         },
     },
-    width: 2000,
-    height: 1000,
+    width: 3200,
+    height: 1600,
     scale: {
         mode: Phaser.Scale.ScaleModes.ENVELOP,
         autoCenter: Phaser.Scale.Center.CENTER_BOTH,

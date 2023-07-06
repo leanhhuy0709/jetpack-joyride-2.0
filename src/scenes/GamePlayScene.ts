@@ -183,6 +183,7 @@ export default class GamePlayScene extends Phaser.Scene {
                 const dead = this.add
                     .sprite(this.player.x, this.player.y, IMAGE.BARRY_DEAD)
                     .setDepth(DEPTH.OBJECT_HIGH)
+                    .setScale(this.cameras.main.width / 3200)
                 this.player.setVisible(false)
                 const sp = this.player.getSpeed()
                 this.player.setSpeed(0)
