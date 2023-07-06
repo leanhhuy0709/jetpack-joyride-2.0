@@ -29,15 +29,15 @@ export default class Worker {
         this.scene = scene
 
         this.body = this.scene.matter.add
-            .sprite(x, y + 43, bodyKey, undefined)
+            .sprite(x, y + (43 * this.scene.cameras.main.width) / 3200, bodyKey, undefined)
             .setDepth(DEPTH.OBJECT_MEDIUM)
-            .setScale(4)
+            .setScale((4 * this.scene.cameras.main.width) / 3200)
             .setFixedRotation()
             .setCollisionGroup(-2)
         this.head = this.scene.matter.add
             .sprite(x, y, headKey, undefined)
             .setDepth(DEPTH.OBJECT_MEDIUM)
-            .setScale(4)
+            .setScale((4 * this.scene.cameras.main.width) / 3200)
             .setFixedRotation()
             .setCollisionGroup(-2)
 
@@ -85,9 +85,9 @@ export default class Worker {
                 repeat: -1,
             })
 
-        this.velocity = (Math.random() - 0.5) / 2
-        if (this.velocity < 0) this.velocity -= 0.1
-        else this.velocity += 0.1
+        this.velocity = (((Math.random() - 0.5) / 2) * this.scene.cameras.main.width) / 3200
+        if (this.velocity < 0) this.velocity -= (0.1 * this.scene.cameras.main.width) / 3200
+        else this.velocity += (0.1 * this.scene.cameras.main.width) / 3200
 
         this.state = WORKER_STATE.MOVE
 
@@ -111,12 +111,12 @@ export default class Worker {
         }
 
         this.headTranslationX = 0
-        this.headTranslationY = -43
+        this.headTranslationY = (-43 * this.scene.cameras.main.width) / 3200
 
         this.shadow = scene.add
-            .sprite(x, y + 230, IMAGE.SHADOW)
+            .sprite(x, y + (230 * this.scene.cameras.main.width) / 3200, IMAGE.SHADOW)
             .setDepth(DEPTH.OBJECT_LOW)
-            .setScale(3)
+            .setScale((3 * this.scene.cameras.main.width) / 3200)
             .setAlpha(0)
     }
 
@@ -152,19 +152,24 @@ export default class Worker {
             this.head.setFlipY(false)
 
             this.headTranslationX = 0
-            this.headTranslationY = -43
+            this.headTranslationY = (-43 * this.scene.cameras.main.width) / 3200
         } else {
             this.body.setFlipY(true)
             this.head.setFlipY(true)
 
             this.headTranslationX = 0
-            this.headTranslationY = 43
+            this.headTranslationY = (43 * this.scene.cameras.main.width) / 3200
         }
 
         this.shadow
             .setPosition(this.body.x, this.shadow.y)
-            .setAlpha((this.body.y - 320) / (1300 - 320))
-            .setScale((3 * (this.body.y - 320)) / (1300 - 320))
+            .setAlpha(((this.body.y / this.scene.cameras.main.width) * 3200 - 320) / (1300 - 320))
+            .setScale(
+                (((3 * ((this.body.y / this.scene.cameras.main.width) * 3200 - 320)) /
+                    (1300 - 320)) *
+                    this.scene.cameras.main.width) /
+                    3200
+            )
             .setVisible(this.body.visible)
     }
 
@@ -194,7 +199,7 @@ export default class Worker {
         this.scene = scene
         this.body.x = x
         this.head.x = x
-        this.body.y = y + 43
+        this.body.y = y + (43 * this.scene.cameras.main.width) / 3200
         this.head.y = y
         this.headKey = headKey
         this.bodyKey = bodyKey
@@ -245,9 +250,9 @@ export default class Worker {
                 repeat: -1,
             })
 
-        this.velocity = (Math.random() - 0.5) / 2
-        if (this.velocity < 0) this.velocity -= 0.1
-        else this.velocity += 0.1
+        this.velocity = (((Math.random() - 0.5) / 2) * this.scene.cameras.main.width) / 3200
+        if (this.velocity < 0) this.velocity -= (0.1 * this.scene.cameras.main.width) / 3200
+        else this.velocity += (0.1 * this.scene.cameras.main.width) / 3200
 
         this.state = WORKER_STATE.MOVE
 
