@@ -66,16 +66,43 @@ export default class GamePlayScene extends Phaser.Scene {
         this.cameras.main.shake(400, new Phaser.Math.Vector2(0.01, 0.01))
 
         ObjectPool.init(this)
-        this.matter.world.setBounds(0, 0, 1000, 1600, 64, false, false, true, true)
+        this.matter.world.setBounds(
+            0,
+            0,
+            (1000 * this.cameras.main.width) / 3200,
+            (1600 * this.cameras.main.width) / 3200,
+            (64 * this.cameras.main.width) / 3200,
+            false,
+            false,
+            true,
+            true
+        )
         this.matter.world.enabled = true
 
-        this.ground = this.matter.add.rectangle(0, 1500, 1e9, 120, { isStatic: true })
+        this.ground = this.matter.add.rectangle(
+            0,
+            (1500 * this.cameras.main.width) / 3200,
+            1e9,
+            (120 * this.cameras.main.width) / 3200,
+            { isStatic: true }
+        )
         this.matter.world.add(this.ground)
 
-        this.ground2 = this.matter.add.rectangle(0, 100, 1e9, 120, { isStatic: true })
+        this.ground2 = this.matter.add.rectangle(
+            0,
+            (100 * this.cameras.main.width) / 3200,
+            1e9,
+            (120 * this.cameras.main.width) / 3200,
+            { isStatic: true }
+        )
         this.matter.world.add(this.ground2)
 
-        this.player = new Player(this, 800, 1250, SPRITE.BARRY_SPRITE_SHEET)
+        this.player = new Player(
+            this,
+            (800 * this.cameras.main.width) / 3200,
+            (1250 * this.cameras.main.width) / 3200,
+            SPRITE.BARRY_SPRITE_SHEET
+        )
 
         if (this.input.keyboard) this.cursors = this.input.keyboard.createCursorKeys()
 
@@ -85,7 +112,14 @@ export default class GamePlayScene extends Phaser.Scene {
 
         this.score = new Score(this)
 
-        this.cameras.main.startFollow(this.player, undefined, undefined, 0, -800, 450)
+        this.cameras.main.startFollow(
+            this.player,
+            undefined,
+            undefined,
+            0,
+            (-800 * this.cameras.main.width) / 3200,
+            (450 * this.cameras.main.width) / 3200
+        )
 
         this.input.addPointer(1)
         this.usingKey = this.usingTouch = true
@@ -155,7 +189,7 @@ export default class GamePlayScene extends Phaser.Scene {
                 this.tweens.add({
                     targets: dead,
                     x: this.player.x + 500 * sp,
-                    y: 1450,
+                    y: (1450 * this.cameras.main.width) / 3200,
                     angle: 90,
                     duration: 500,
                     onComplete: () => {
@@ -186,7 +220,8 @@ export default class GamePlayScene extends Phaser.Scene {
                 this.evaluateSpeed(this.score.getScore(), this.player.getDefaultSpeed())
             )
             this.zapCoinManager.setMinSafeDistance(
-                DEFAULT_SAFE_DISTACE + this.player.getSpeed() * 30
+                (DEFAULT_SAFE_DISTACE * this.cameras.main.width) / 3200 +
+                    this.player.getSpeed() * 30
             )
         }
     }
