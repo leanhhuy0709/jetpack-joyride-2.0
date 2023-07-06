@@ -226,10 +226,6 @@ export default class GamePlayScene extends Phaser.Scene {
         }
     }
 
-    private evaluateSmokeYPosition(x: number, offset: number, coef: number): number {
-        return coef * 0.5 * ((x - 1000) / 100) ** 2 + 1000 + offset
-    }
-
     private evaluateSpeed(score: number, init: number): number {
         return Math.log10((0.5 * score) / 1000 + 1) + init
     }

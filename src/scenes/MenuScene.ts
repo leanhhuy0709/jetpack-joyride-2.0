@@ -46,54 +46,109 @@ export default class MenuScene extends Phaser.Scene {
 
     public create(): void {
         this.add
-            .image(2155, 0, IMAGE.MID_ROOM)
+            .image((2155 * this.cameras.main.width) / 3200, 0, IMAGE.MID_ROOM)
             .setOrigin(0, 200 / 1600)
-            .setCrop(0, 200, 2021, 1200)
-            .setDisplaySize((2021 * 1600) / 1200, (1600 * 1600) / 1200)
+            .setCrop(
+                0,
+                (200 * this.cameras.main.width) / 3200,
+                (2021 * this.cameras.main.width) / 3200,
+                (1200 * this.cameras.main.width) / 3200
+            )
+            .setDisplaySize(
+                (((2021 * 1600) / 1200) * this.cameras.main.width) / 3200,
+                (((1600 * 1600) / 1200) * this.cameras.main.width) / 3200
+            )
 
-        new StartBackground(this, 500, false)
+        new StartBackground(this, (500 * this.cameras.main.width) / 3200, false)
 
-        this.add.image(870, 1300, IMAGE.DO_NOT_TOUCH).setDepth(DEPTH.OBJECT_VERYHIGH).setScale(1.7)
+        this.add
+            .image(
+                (870 * this.cameras.main.width) / 3200,
+                (130 * this.cameras.main.width) / 32000,
+                IMAGE.DO_NOT_TOUCH
+            )
+            .setDepth(DEPTH.OBJECT_VERYHIGH)
+            .setScale(1.7)
 
         this.logoGlow = this.add
-            .image(1750, 830, IMAGE.TITLE_GLOW)
+            .image(
+                (1750 * this.cameras.main.width) / 3200,
+                (830 * this.cameras.main.width) / 3200,
+                IMAGE.TITLE_GLOW
+            )
             .setDepth(DEPTH.BACKGROUND_VERYHIGH)
-            .setScale(3)
+            .setScale((3 * this.cameras.main.width) / 3200)
 
         this.logo = this.add
-            .image(1800, 800, IMAGE.TITLE)
+            .image(
+                (1800 * this.cameras.main.width) / 3200,
+                (800 * this.cameras.main.width) / 3200,
+                IMAGE.TITLE
+            )
             .setDepth(DEPTH.BACKGROUND_VERYHIGH)
-            .setScale(1.5)
+            .setScale((1.5 * this.cameras.main.width) / 3200)
 
         if (this.input.keyboard) this.cursors = this.input.keyboard.createCursorKeys()
 
-        this.add.rectangle(0, 0, 500, 1600, 0x01234).setOrigin(0, 0)
+        this.add
+            .rectangle(
+                0,
+                0,
+                (500 * this.cameras.main.width) / 3200,
+                (1600 * this.cameras.main.width) / 3200,
+                0x01234
+            )
+            .setOrigin(0, 0)
 
-        this.adsBtn = new Button(this, 250, 100, 300, 100, 'ADS', {
-            fontSize: '50px',
-            fontStyle: 'bold',
-            fontFamily: FONT_NAME,
-        })
+        this.adsBtn = new Button(
+            this,
+            (250 * this.cameras.main.width) / 3200,
+            (100 * this.cameras.main.width) / 3200,
+            (300 * this.cameras.main.width) / 3200,
+            (100 * this.cameras.main.width) / 3200,
+            'ADS',
+            {
+                fontSize: '50px',
+                fontStyle: 'bold',
+                fontFamily: FONT_NAME,
+            }
+        )
 
         this.adsBtn.setInteractive()
 
-        this.shopBtn = new Button(this, 250, 300, 300, 100, 'SHOP', {
-            fontSize: '50px',
-            fontStyle: 'bold',
-            fontFamily: FONT_NAME,
-        })
+        this.shopBtn = new Button(
+            this,
+            (250 * this.cameras.main.width) / 3200,
+            (300 * this.cameras.main.width) / 3200,
+            (300 * this.cameras.main.width) / 3200,
+            (100 * this.cameras.main.width) / 3200,
+            'SHOP',
+            {
+                fontSize: '50px',
+                fontStyle: 'bold',
+                fontFamily: FONT_NAME,
+            }
+        )
 
         this.shopBtn.setInteractive()
 
-        this.powerUpBtn = new Button(this, 250, 500, 300, 100, 'POWER-UPS', {
-            fontSize: '50px',
-            fontStyle: 'bold',
-            fontFamily: FONT_NAME,
-        })
+        this.powerUpBtn = new Button(
+            this,
+            (250 * this.cameras.main.width) / 3200,
+            (500 * this.cameras.main.width) / 3200,
+            (300 * this.cameras.main.width) / 3200,
+            (100 * this.cameras.main.width) / 3200,
+            'POWER-UPS',
+            {
+                fontSize: '50px',
+                fontStyle: 'bold',
+                fontFamily: FONT_NAME,
+            }
+        )
 
         this.powerUpBtn.setInteractive()
 
-        this.costumesBtn = new Button(this, 250, 700, 300, 100, 'COSTUMES', {
+        this.costumesBtn = new Button(this, 250* this.cameras.main.width/3200, 700* this.cameras.main.width/3200, 300* this.cameras.main.width/3200, 100* this.cameras.main.width/3200, 'COSTUMES', {
             fontSize: '50px',
             fontStyle: 'bold',
             fontFamily: FONT_NAME,
@@ -101,7 +156,7 @@ export default class MenuScene extends Phaser.Scene {
 
         this.costumesBtn.setInteractive()
 
-        this.halfBrickBtn = new Button(this, 250, 900, 300, 100, 'HALFBRICK', {
+        this.halfBrickBtn = new Button(this, 250* this.cameras.main.width/3200, 900* this.cameras.main.width/3200, 300* this.cameras.main.width/3200, 100* this.cameras.main.width/3200, 'HALFBRICK', {
             fontSize: '50px',
             fontStyle: 'bold',
             fontFamily: FONT_NAME,
@@ -109,7 +164,7 @@ export default class MenuScene extends Phaser.Scene {
 
         this.halfBrickBtn.setInteractive()
 
-        this.playBtn = new Button(this, 1800, 1300, 300, 100, 'PLAY', {
+        this.playBtn = new Button(this, 1800* this.cameras.main.width/3200, 1300* this.cameras.main.width/3200, 300* this.cameras.main.width/3200, 100* this.cameras.main.width/3200, 'PLAY', {
             fontSize: '50px',
             fontStyle: 'bold',
             fontFamily: FONT_NAME,
@@ -118,20 +173,20 @@ export default class MenuScene extends Phaser.Scene {
         this.playBtn.setInteractive()
 
         this.rect = this.add
-            .rectangle(2400, 0, 600, 125, 0x01234)
+            .rectangle(2400* this.cameras.main.width/3200, 0, 600* this.cameras.main.width/3200, 125* this.cameras.main.width/3200, 0x01234)
             .setOrigin(0, 0)
             .setDepth(DEPTH.OBJECT_LOW)
 
         const allCoin = UserData.getAllCoin()
 
-        this.coinRect = new Button(this, 2580, 100 / 2 + 12.5, 300, 100, String(allCoin), {
+        this.coinRect = new Button(this, 2580* this.cameras.main.width/3200, 62.5* this.cameras.main.width/3200, 300* this.cameras.main.width/3200, 100* this.cameras.main.width/3200, String(allCoin), {
             fontSize: '50px',
             fontStyle: 'bold',
             fontFamily: FONT_NAME,
             color: '#FFF0C8',
         })
 
-        this.settingBtn = new Button(this, 2880, 100 / 2 + 12.5, 200, 100, 'Setting', {
+        this.settingBtn = new Button(this, 2880* this.cameras.main.width/3200, 62.5* this.cameras.main.width/3200, 200* this.cameras.main.width/3200, 100* this.cameras.main.width/3200, 'Setting', {
             fontSize: '50px',
             fontStyle: 'bold',
             fontFamily: FONT_NAME,
@@ -205,22 +260,22 @@ export default class MenuScene extends Phaser.Scene {
             })
             this.tweens.add({
                 targets: this.coinRect.getText(),
-                y: 100 / 2 + 12.5 - 150,
+                y: (62.5 - 150)* this.cameras.main.width/3200,
                 duration: 300,
             })
             this.tweens.add({
                 targets: this.coinRect.getRectangle(),
-                y: 100 / 2 + 12.5 - 150,
+                y: (100 / 2 + 12.5 - 150)* this.cameras.main.width/3200,
                 duration: 300,
             })
             this.tweens.add({
                 targets: this.settingBtn.getText(),
-                y: 100 / 2 + 12.5 - 150,
+                y: (100 / 2 + 12.5 - 150)* this.cameras.main.width/3200,
                 duration: 300,
             })
             this.tweens.add({
                 targets: this.settingBtn.getRectangle(),
-                y: 100 / 2 + 12.5 - 150,
+                y: (100 / 2 + 12.5 - 150)* this.cameras.main.width/3200,
                 duration: 300,
             })
             this.tweens.add({
@@ -236,7 +291,7 @@ export default class MenuScene extends Phaser.Scene {
 
             this.tweens.add({
                 targets: this.cameras.main,
-                scrollX: 500,
+                scrollX: 500* this.cameras.main.width/3200,
                 duration: 500,
                 onComplete: () => {
                     setTimeout(() => {
