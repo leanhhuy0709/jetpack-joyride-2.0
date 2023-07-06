@@ -50,58 +50,28 @@ export default class ShopScene extends Phaser.Scene {
     }
 
     public create(): void {
-        this.add
-            .rectangle(
-                0,
-                0,
-                (3200 * this.cameras.main.width) / 3200,
-                (1600 * this.cameras.main.width) / 3200,
-                0x0000
-            )
-            .setOrigin(0, 0)
-            .setAlpha(0.8)
+        this.add.rectangle(0, 0, 3200, 1600, 0x0000).setOrigin(0, 0).setAlpha(0.8)
 
-        this.backBtn = new Button(
-            this,
-            (300 * this.cameras.main.width) / 3200,
-            (100 * this.cameras.main.width) / 3200,
-            (200 * this.cameras.main.width) / 3200,
-            (80 * this.cameras.main.width) / 3200,
-            'BACK',
-            {
-                color: '#ffffff',
-                fontSize: (40 * this.cameras.main.width) / 3200,
-                fontStyle: 'bold',
-                fontFamily: FONT_NAME,
-            }
-        )
+        this.backBtn = new Button(this, 300, 100, 200, 80, 'BACK', {
+            color: '#ffffff',
+            fontSize: '40px',
+            fontStyle: 'bold',
+            fontFamily: FONT_NAME,
+        })
         this.backBtn.setInteractive()
 
         this.add
-            .text(
-                (1600 * this.cameras.main.width) / 3200,
-                (20 * this.cameras.main.width) / 3200,
-                'SHOP',
-                {
-                    fontSize: (110 * this.cameras.main.width) / 3200,
-                    fontStyle: 'bold',
-                    fontFamily: FONT_NAME,
-                }
-            )
-            .setStroke('#000000', (10 * this.cameras.main.width) / 3200)
+            .text(1600, 20, 'SHOP', {
+                fontSize: '110px',
+                fontStyle: 'bold',
+                fontFamily: FONT_NAME,
+            })
+            .setStroke('#000000', 10)
             .setOrigin(0.5, 0)
 
-        this.add
-            .rectangle(
-                (1600 * this.cameras.main.width) / 3200,
-                (200 * this.cameras.main.width) / 3200,
-                (2800 * this.cameras.main.width) / 3200,
-                (1200 * this.cameras.main.width) / 3200,
-                0x1f2944
-            )
-            .setOrigin(0.5, 0)
+        this.add.rectangle(1600, 200, 2800, 1200, 0x1f2944).setOrigin(0.5, 0)
         this.productTexture = []
-        let tmp = (300 * this.cameras.main.width) / 3200
+        let tmp = 300
         for (let i = 0; i < this.keyList.length; i++) {
             const p1 = new Product(
                 this.keyList[i],
@@ -110,16 +80,8 @@ export default class ShopScene extends Phaser.Scene {
                 UserData.getProductState(i + this.index),
                 this.descriptionList[i]
             )
-            this.productTexture.push(
-                new ProductTexture(
-                    this,
-                    (200 * this.cameras.main.width) / 3200,
-                    tmp,
-                    p1,
-                    (2800 * this.cameras.main.width) / 3200
-                )
-            )
-            tmp += (220 * this.cameras.main.width) / 3200
+            this.productTexture.push(new ProductTexture(this, 200, tmp, p1, 2800))
+            tmp += 220
         }
     }
 

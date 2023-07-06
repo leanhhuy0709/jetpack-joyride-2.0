@@ -34,12 +34,14 @@ export default class Worker {
             .setScale((4 * this.scene.cameras.main.width) / 3200)
             .setFixedRotation()
             .setCollisionGroup(-2)
+            .setOrigin(0, 0.3)
         this.head = this.scene.matter.add
             .sprite(x, y, headKey, undefined)
             .setDepth(DEPTH.OBJECT_MEDIUM)
             .setScale((4 * this.scene.cameras.main.width) / 3200)
             .setFixedRotation()
             .setCollisionGroup(-2)
+            .setOrigin(0, 0.3)
 
         if (!this.scene.anims.exists(bodyKey + 'move'))
             this.scene.anims.create({
@@ -114,7 +116,7 @@ export default class Worker {
         this.headTranslationY = (-43 * this.scene.cameras.main.width) / 3200
 
         this.shadow = scene.add
-            .sprite(x, y + (230 * this.scene.cameras.main.width) / 3200, IMAGE.SHADOW)
+            .sprite(x + 200, y + (200 * this.scene.cameras.main.width) / 3200, IMAGE.SHADOW)
             .setDepth(DEPTH.OBJECT_LOW)
             .setScale((3 * this.scene.cameras.main.width) / 3200)
             .setAlpha(0)
@@ -162,7 +164,7 @@ export default class Worker {
         }
 
         this.shadow
-            .setPosition(this.body.x, this.shadow.y)
+            .setPosition(this.body.x + 50, this.shadow.y)
             .setAlpha(((this.body.y / this.scene.cameras.main.width) * 3200 - 320) / (1300 - 320))
             .setScale(
                 (((3 * ((this.body.y / this.scene.cameras.main.width) * 3200 - 320)) /

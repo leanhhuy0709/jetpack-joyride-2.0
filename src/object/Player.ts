@@ -58,7 +58,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         this.scene.add.existing(this)
         this.createAnims(key)
 
-        this.defaultSpeed = 0.5 *this.scene.cameras.main.width / 3200
+        this.defaultSpeed = (0.5 * this.scene.cameras.main.width) / 3200
         this.speed = this.defaultSpeed
         this.canFireBullet = true
         this.jumpVelo = (DEFAULT_JUMP_VELO * this.scene.cameras.main.width) / 3200
@@ -169,18 +169,9 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         this.updateBullet(delta)
 
         this.shadow
-            .setPosition(this.x - (10 * this.scene.cameras.main.width) / 3200, this.shadow.y)
-            .setAlpha(
-                (this.y - (320 * this.scene.cameras.main.width) / 3200) /
-                    980 /
-                    this.scene.cameras.main.width /
-                    3200
-            )
-            .setScale(
-                (((3 * ((this.y * 3200) / this.scene.cameras.main.width - 320)) / (1300 - 320)) *
-                    this.scene.cameras.main.width) /
-                    3200
-            )
+            .setPosition(this.x - 10, this.shadow.y)
+            .setAlpha((this.y - 320) / 980)
+            .setScale((3 * (this.y - 320)) / (1300 - 320))
             .setVisible(this.visible)
 
         for (let i = 0; i < this.equipments.length; i++) this.equipments[i].update(delta)

@@ -76,7 +76,7 @@ export default class MenuScene extends Phaser.Scene {
 
         this.adsBtn = new Button(
             this,
-            (250 * this.cameras.main.width) / 3200,
+            (315 * this.cameras.main.width) / 3200,
             (100 * this.cameras.main.width) / 3200,
             (300 * this.cameras.main.width) / 3200,
             (100 * this.cameras.main.width) / 3200,
@@ -92,7 +92,7 @@ export default class MenuScene extends Phaser.Scene {
 
         this.shopBtn = new Button(
             this,
-            (250 * this.cameras.main.width) / 3200,
+            (315 * this.cameras.main.width) / 3200,
             (300 * this.cameras.main.width) / 3200,
             (300 * this.cameras.main.width) / 3200,
             (100 * this.cameras.main.width) / 3200,
@@ -108,7 +108,7 @@ export default class MenuScene extends Phaser.Scene {
 
         this.powerUpBtn = new Button(
             this,
-            (250 * this.cameras.main.width) / 3200,
+            (315 * this.cameras.main.width) / 3200,
             (500 * this.cameras.main.width) / 3200,
             (300 * this.cameras.main.width) / 3200,
             (100 * this.cameras.main.width) / 3200,
@@ -124,7 +124,7 @@ export default class MenuScene extends Phaser.Scene {
 
         this.costumesBtn = new Button(
             this,
-            (250 * this.cameras.main.width) / 3200,
+            (315 * this.cameras.main.width) / 3200,
             (700 * this.cameras.main.width) / 3200,
             (300 * this.cameras.main.width) / 3200,
             (100 * this.cameras.main.width) / 3200,
@@ -140,7 +140,7 @@ export default class MenuScene extends Phaser.Scene {
 
         this.halfBrickBtn = new Button(
             this,
-            (250 * this.cameras.main.width) / 3200,
+            (315 * this.cameras.main.width) / 3200,
             (900 * this.cameras.main.width) / 3200,
             (300 * this.cameras.main.width) / 3200,
             (100 * this.cameras.main.width) / 3200,
