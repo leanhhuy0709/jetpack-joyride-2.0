@@ -79,7 +79,7 @@ export default class PauseScene extends Phaser.Scene {
             'CONTINUE',
             {
                 color: '#ffffff',
-                fontSize: '80px',
+                fontSize: (80 * this.cameras.main.width) / 3200,
                 fontStyle: 'bold',
                 fontFamily: FONT_NAME,
             }
@@ -95,7 +95,7 @@ export default class PauseScene extends Phaser.Scene {
             'SETTING',
             {
                 color: '#ffffff',
-                fontSize: '80px',
+                fontSize: (80 * this.cameras.main.width) / 3200,
                 fontStyle: 'bold',
                 fontFamily: FONT_NAME,
             }
@@ -111,7 +111,7 @@ export default class PauseScene extends Phaser.Scene {
             'HOME',
             {
                 color: '#ffffff',
-                fontSize: '80px',
+                fontSize: (80 * this.cameras.main.width) / 3200,
                 fontStyle: 'bold',
                 fontFamily: FONT_NAME,
             }

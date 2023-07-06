@@ -31,10 +31,8 @@ export const GameConfig: Phaser.Types.Core.GameConfig = {
             },
         },
     },
-    clearBeforeRender: false,
-    preserveDrawingBuffer: true,
-    width: 3200,
-    height: 1600,
+    width: 2000,
+    height: 1000,
     scale: {
         mode: Phaser.Scale.ScaleModes.ENVELOP,
         autoCenter: Phaser.Scale.Center.CENTER_BOTH,

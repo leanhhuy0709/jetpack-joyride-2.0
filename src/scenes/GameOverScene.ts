@@ -70,7 +70,7 @@ export default class GameOverScene extends Phaser.Scene {
                 (150 * this.cameras.main.width) / 3200,
                 'RESULTS',
                 {
-                    fontSize: '80px',
+                    fontSize: (80 * this.cameras.main.width) / 3200,
                     fontStyle: 'bold',
                     fontFamily: FONT_NAME,
                 }
@@ -84,7 +84,7 @@ export default class GameOverScene extends Phaser.Scene {
                 (275 * this.cameras.main.width) / 3200,
                 'DISTANCE',
                 {
-                    fontSize: '80px',
+                    fontSize: (80 * this.cameras.main.width) / 3200,
                     fontStyle: 'bold',
                     fontFamily: FONT_NAME,
                 }
@@ -98,7 +98,7 @@ export default class GameOverScene extends Phaser.Scene {
                 (400 * this.cameras.main.width) / 3200,
                 `${Math.floor(this.score)}M`,
                 {
-                    fontSize: '125px',
+                    fontSize: (125 * this.cameras.main.width) / 3200,
                     fontFamily: FONT_NAME,
                     fontStyle: 'bold',
                     color: '#fef03b',
@@ -113,7 +113,7 @@ export default class GameOverScene extends Phaser.Scene {
                 (600 * this.cameras.main.width) / 3200,
                 'COLLECTED',
                 {
-                    fontSize: '60px',
+                    fontSize: (60 * this.cameras.main.width) / 3200,
                     fontFamily: FONT_NAME,
                     fontStyle: 'bold',
                 }
@@ -127,7 +127,7 @@ export default class GameOverScene extends Phaser.Scene {
                 (600 * this.cameras.main.width) / 3200,
                 `${this.coin}`,
                 {
-                    fontSize: '60px',
+                    fontSize: (60 * this.cameras.main.width) / 3200,
                     fontFamily: FONT_NAME,
                     color: '#fef03b',
                     fontStyle: 'bold',
@@ -153,7 +153,7 @@ export default class GameOverScene extends Phaser.Scene {
             'PLAY AGAIN',
             {
                 color: '#ffffff',
-                fontSize: '80px',
+                fontSize: (80 * this.cameras.main.width) / 3200,
                 fontStyle: 'bold',
                 fontFamily: FONT_NAME,
             }
@@ -169,7 +169,7 @@ export default class GameOverScene extends Phaser.Scene {
             'HOME',
             {
                 color: '#ffffff',
-                fontSize: '80px',
+                fontSize: (80 * this.cameras.main.width) / 3200,
                 fontStyle: 'bold',
                 fontFamily: FONT_NAME,
             }

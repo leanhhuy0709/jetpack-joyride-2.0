@@ -15,14 +15,30 @@ export default class LoadingScene extends Phaser.Scene {
         this.progressBar = this.add.graphics()
         this.progressBar.setDepth(DEPTH.BACKGROUND_HIGH)
         this.add
-            .image(this.cameras.main.width / 2, this.cameras.main.height / 2, 'loading-bg')
-            .setDisplaySize(this.cameras.main.width, this.cameras.main.height)
+            .image(0, 0, 'loading-bg')
+            .setOrigin(0, 0)
+            .setDisplaySize(
+                (3200 * this.cameras.main.width) / 3200,
+                (1600 * this.cameras.main.width) / 3200
+            )
         this.load.on('progress', (value: number) => {
             this.progressBar.clear()
             this.progressBar.fillStyle(0xb0bef7, 1)
-            this.progressBar.fillRoundedRect(750, 1250, 1600 * value, 50, 20)
-            this.progressBar.lineStyle(5, 0x0000)
-            this.progressBar.strokeRoundedRect(750, 1250, 1600, 50, 20)
+            this.progressBar.fillRoundedRect(
+                (750 * this.cameras.main.width) / 3200,
+                (1250 * this.cameras.main.width) / 3200,
+                (1600 * value * this.cameras.main.width) / 3200,
+                (50 * this.cameras.main.width) / 3200,
+                (20 * this.cameras.main.width) / 3200
+            )
+            this.progressBar.lineStyle((5 * this.cameras.main.width) / 3200, 0x0000)
+            this.progressBar.strokeRoundedRect(
+                (750 * this.cameras.main.width) / 3200,
+                (1250 * this.cameras.main.width) / 3200,
+                (1600 * this.cameras.main.width) / 3200,
+                (50 * this.cameras.main.width) / 3200,
+                (20 * this.cameras.main.width) / 3200
+            )
         })
 
         this.load.spritesheet(SPRITE.BARRY_SPRITE_SHEET, SPRITE.BARRY_SPRITE_SHEET, {

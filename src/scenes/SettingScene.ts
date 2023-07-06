@@ -62,7 +62,7 @@ export default class SettingScene extends Phaser.Scene {
             'BACK',
             {
                 color: '#ffffff',
-                fontSize: '40px',
+                fontSize: 40*this.cameras.main.width / 3200,
                 fontStyle: 'bold',
                 fontFamily: FONT_NAME,
             }
@@ -78,7 +78,7 @@ export default class SettingScene extends Phaser.Scene {
             '+',
             {
                 color: '#ffffff',
-                fontSize: '130px',
+                fontSize: 130*this.cameras.main.width / 3200,
                 fontStyle: 'bold',
             }
         )
@@ -93,7 +93,7 @@ export default class SettingScene extends Phaser.Scene {
             '-',
             {
                 color: '#ffffff',
-                fontSize: '130px',
+                fontSize: 130*this.cameras.main.width / 3200,
                 fontStyle: 'bold',
             }
         )
@@ -105,7 +105,7 @@ export default class SettingScene extends Phaser.Scene {
                 (800 * this.cameras.main.width) / 3200,
                 String(Math.ceil(Volume.value * 100)),
                 {
-                    fontSize: '130px',
+                    fontSize: 130*this.cameras.main.width / 3200,
                     fontStyle: 'bold',
                     fontFamily: FONT_NAME,
                 }

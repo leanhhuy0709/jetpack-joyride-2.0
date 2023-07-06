@@ -70,7 +70,7 @@ export default class ShopScene extends Phaser.Scene {
             'BACK',
             {
                 color: '#ffffff',
-                fontSize: '40px',
+                fontSize: (40 * this.cameras.main.width) / 3200,
                 fontStyle: 'bold',
                 fontFamily: FONT_NAME,
             }
@@ -83,7 +83,7 @@ export default class ShopScene extends Phaser.Scene {
                 (20 * this.cameras.main.width) / 3200,
                 'SHOP',
                 {
-                    fontSize: '110px',
+                    fontSize: (110 * this.cameras.main.width) / 3200,
                     fontStyle: 'bold',
                     fontFamily: FONT_NAME,
                 }
