@@ -17,8 +17,11 @@ export default class Zap extends Obstacle {
         super(scene)
         this.sprite1 = scene.matter.add
             .sprite(x1, y1, SPRITE.ORB_ANIM, 0, { isStatic: true })
-            .setCircle(30)
-            .setDisplaySize(62 * 2, 42 * 2)
+            .setCircle((30 * scene.cameras.main.width) / 3200)
+            .setDisplaySize(
+                (62 * 2 * scene.cameras.main.width) / 3200,
+                (42 * 2 * scene.cameras.main.width) / 3200
+            )
             .setStatic(true)
             .setDepth(DEPTH.OBJECT_HIGH)
             .setCollisionGroup(-2)
@@ -32,8 +35,11 @@ export default class Zap extends Obstacle {
 
         this.sprite2 = scene.matter.add
             .sprite(x2, y2, SPRITE.ORB_ANIM, 0, { isStatic: true })
-            .setCircle(30)
-            .setDisplaySize(62 * 2, 42 * 2)
+            .setCircle((30 * scene.cameras.main.width) / 3200)
+            .setDisplaySize(
+                (62 * 2 * scene.cameras.main.width) / 3200,
+                (42 * 2 * scene.cameras.main.width) / 3200
+            )
             .setStatic(true)
             .setDepth(DEPTH.OBJECT_HIGH)
             .setCollisionGroup(-2)
@@ -51,7 +57,10 @@ export default class Zap extends Obstacle {
         this.glow1 = scene.add
             .sprite(x1, y1, SPRITE.GLOW, 0)
             .setDepth(DEPTH.BACKGROUND_MEDIUM)
-            .setDisplaySize(230, 230)
+            .setDisplaySize(
+                (230 * scene.cameras.main.width) / 3200,
+                (230 * scene.cameras.main.width) / 3200
+            )
 
         this.glow1.anims.create({
             key: 'bloom1',
@@ -63,7 +72,10 @@ export default class Zap extends Obstacle {
         this.glow2 = scene.add
             .sprite(x2, y2, SPRITE.GLOW, 0)
             .setDepth(DEPTH.BACKGROUND_MEDIUM)
-            .setDisplaySize(230, 230)
+            .setDisplaySize(
+                (230 * scene.cameras.main.width) / 3200,
+                (230 * scene.cameras.main.width) / 3200
+            )
 
         this.glow2.anims.create({
             key: 'bloom2',
@@ -178,13 +190,13 @@ export default class Zap extends Obstacle {
                 Math.sqrt(
                     (this.sprite1.x - this.sprite2.x) ** 2 + (this.sprite1.y - this.sprite2.y) ** 2
                 ) + tmp,
-                100
+                (100 * this.scene.cameras.main.width) / 3200
             )
             .setRectangle(
                 Math.sqrt(
                     (this.sprite1.x - this.sprite2.x) ** 2 + (this.sprite1.y - this.sprite2.y) ** 2
                 ) + tmp,
-                100 - 50
+                (50 * this.scene.cameras.main.width) / 3200
             )
             .setCollisionGroup(-2)
 
@@ -196,14 +208,14 @@ export default class Zap extends Obstacle {
     }
 
     public reset(minX: number): void {
-        const x1 = minX + Phaser.Math.Between(0, 300)
-        const x2 = x1 + Phaser.Math.Between(200, 500)
-        const y1 = Phaser.Math.Between(650, 1000)
-        let y2 = Phaser.Math.Between(650, 1000)
+        const x1 = minX + (Phaser.Math.Between(0, 300) * this.scene.cameras.main.width) / 3200
+        const x2 = x1 + (Phaser.Math.Between(200, 500) * this.scene.cameras.main.width) / 3200
+        const y1 = (Phaser.Math.Between(650, 1000) * this.scene.cameras.main.width) / 3200
+        let y2 = (Phaser.Math.Between(650, 1000) * this.scene.cameras.main.width) / 3200
         const tmp = Math.random()
 
-        if (tmp < this.hardChance) y2 = 1250
-        else if (tmp < this.hardChance * 2) y2 = 300
+        if (tmp < this.hardChance) y2 = (1250 * this.scene.cameras.main.width) / 3200
+        else if (tmp < this.hardChance * 2) y2 = (300 * this.scene.cameras.main.width) / 3200
 
         this.sprite1.setRotation(Math.PI / 2 + Math.atan((y2 - y1) / (x2 - x1)))
         this.sprite2.setRotation(-Math.PI / 2 + Math.atan((y2 - y1) / (x2 - x1)))
