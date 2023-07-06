@@ -12,9 +12,18 @@ export default class Coin {
     private minY: number
     private maxY: number
     private coinPatternIdx: number
-    private static sound1: Phaser.Sound.WebAudioSound | Phaser.Sound.NoAudioSound | Phaser.Sound.HTML5AudioSound
-    private static sound2: Phaser.Sound.WebAudioSound | Phaser.Sound.NoAudioSound | Phaser.Sound.HTML5AudioSound
-    private static sound3: Phaser.Sound.WebAudioSound | Phaser.Sound.NoAudioSound | Phaser.Sound.HTML5AudioSound
+    private static sound1:
+        | Phaser.Sound.WebAudioSound
+        | Phaser.Sound.NoAudioSound
+        | Phaser.Sound.HTML5AudioSound
+    private static sound2:
+        | Phaser.Sound.WebAudioSound
+        | Phaser.Sound.NoAudioSound
+        | Phaser.Sound.HTML5AudioSound
+    private static sound3:
+        | Phaser.Sound.WebAudioSound
+        | Phaser.Sound.NoAudioSound
+        | Phaser.Sound.HTML5AudioSound
 
     public constructor(scene: Phaser.Scene, x: number, y: number, coinPatternIdx = 1) {
         this.scene = scene
@@ -23,7 +32,7 @@ export default class Coin {
         const coinPattern = this.scene.cache.text.get(`pattern${coinPatternIdx}`)
         let row = 0,
             col = 0
-        const d = 70
+        const d = (70 * scene.cameras.main.height) / 1600
 
         const temp = this.scene.add.sprite(-20, -20, SPRITE.COIN_SPRITE)
         if (!this.scene.anims.exists('turn'))
@@ -50,7 +59,10 @@ export default class Coin {
                 this.coins.push(
                     this.scene.matter.add
                         .sprite(x + col * d, y + row * d, SPRITE.COIN_SPRITE, 0, { isStatic: true })
-                        .setDisplaySize(50, 50)
+                        .setDisplaySize(
+                            (50 * scene.cameras.main.width) / 3200,
+                            (50 * scene.cameras.main.height) / 1600
+                        )
                         .play('turn')
                         .setCollisionGroup(-2)
                         .setDepth(DEPTH.OBJECT_LOW)
@@ -108,7 +120,6 @@ export default class Coin {
     }
 
     public setVisible(visible: boolean): Coin {
-
         if (this.coins[0].visible == visible) return this
 
         for (let i = 0; i < this.coins.length; i++) {
@@ -122,7 +133,7 @@ export default class Coin {
         const coinPattern = this.scene.cache.text.get(`pattern${this.coinPatternIdx}`)
         let row = 0,
             col = 0
-        const d = 70
+        const d = (70 * scene.cameras.main.height) / 1600
 
         this.minX = x
         this.maxX = x
