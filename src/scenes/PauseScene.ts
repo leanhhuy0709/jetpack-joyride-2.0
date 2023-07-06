@@ -24,36 +24,98 @@ export default class PauseScene extends Phaser.Scene {
     }
 
     public create(): void {
-        this.add.rectangle(0, 0, 3200, 1600, 0x000000).setOrigin(0, 0).setAlpha(0.5)
+        this.add
+            .rectangle(
+                0,
+                0,
+                (3200 * this.cameras.main.width) / 3200,
+                (1600 * this.cameras.main.width) / 3200,
+                0x000000
+            )
+            .setOrigin(0, 0)
+            .setAlpha(0.5)
 
-        this.add.rectangle(2100, 100 + 100 / 2, 950, 1250, 0x8aa1c0).setOrigin(0.5, 0)
-        this.add.rectangle(2100, 100 + 100 / 2, 930, 1240, 0x242c46).setOrigin(0.5, 0)
+        this.add
+            .rectangle(
+                (2100 * this.cameras.main.width) / 3200,
+                (150 * this.cameras.main.width) / 3200,
+                (950 * this.cameras.main.width) / 3200,
+                (1250 * this.cameras.main.width) / 3200,
+                0x8aa1c0
+            )
+            .setOrigin(0.5, 0)
+        this.add
+            .rectangle(
+                (2100 * this.cameras.main.width) / 3200,
+                (150 * this.cameras.main.width) / 3200,
+                (930 * this.cameras.main.width) / 3200,
+                (1240 * this.cameras.main.width) / 3200,
+                0x242c46
+            )
+            .setOrigin(0.5, 0)
 
-        this.add.rectangle(2100, 100 + 100 / 2, 1000, 100, 0x575f61)
-        this.add.nineslice(2100, 100 + 100 / 2, IMAGE.BUTTON_BACKING, undefined, 1000, 50)
+        this.add.rectangle(
+            (2100 * this.cameras.main.width) / 3200,
+            (150 * this.cameras.main.width) / 3200,
+            (1000 * this.cameras.main.width) / 3200,
+            (100 * this.cameras.main.width) / 3200,
+            0x575f61
+        )
+        this.add.nineslice(
+            (2100 * this.cameras.main.width) / 3200,
+            (150 * this.cameras.main.width) / 3200,
+            IMAGE.BUTTON_BACKING,
+            undefined,
+            (1000 * this.cameras.main.width) / 3200,
+            (50 * this.cameras.main.width) / 3200
+        )
 
-        this.continueBtn = new Button(this, 2100, 500, 650, 200, 'CONTINUE', {
-            color: '#ffffff',
-            fontSize: '80px',
-            fontStyle: 'bold',
-            fontFamily: FONT_NAME,
-        })
+        this.continueBtn = new Button(
+            this,
+            (2100 * this.cameras.main.width) / 3200,
+            (500 * this.cameras.main.width) / 3200,
+            (650 * this.cameras.main.width) / 3200,
+            (200 * this.cameras.main.width) / 3200,
+            'CONTINUE',
+            {
+                color: '#ffffff',
+                fontSize: '80px',
+                fontStyle: 'bold',
+                fontFamily: FONT_NAME,
+            }
+        )
         this.continueBtn.setInteractive()
 
-        this.settingBtn = new Button(this, 2100, 800, 650, 200, 'SETTING', {
-            color: '#ffffff',
-            fontSize: '80px',
-            fontStyle: 'bold',
-            fontFamily: FONT_NAME,
-        })
+        this.settingBtn = new Button(
+            this,
+            (2100 * this.cameras.main.width) / 3200,
+            (800 * this.cameras.main.width) / 3200,
+            (650 * this.cameras.main.width) / 3200,
+            (200 * this.cameras.main.width) / 3200,
+            'SETTING',
+            {
+                color: '#ffffff',
+                fontSize: '80px',
+                fontStyle: 'bold',
+                fontFamily: FONT_NAME,
+            }
+        )
         this.settingBtn.setInteractive()
 
-        this.homeBtn = new Button(this, 2100, 1100, 650, 200, 'HOME', {
-            color: '#ffffff',
-            fontSize: '80px',
-            fontStyle: 'bold',
-            fontFamily: FONT_NAME,
-        })
+        this.homeBtn = new Button(
+            this,
+            (2100 * this.cameras.main.width) / 3200,
+            (1100 * this.cameras.main.width) / 3200,
+            (650 * this.cameras.main.width) / 3200,
+            (200 * this.cameras.main.width) / 3200,
+            'HOME',
+            {
+                color: '#ffffff',
+                fontSize: '80px',
+                fontStyle: 'bold',
+                fontFamily: FONT_NAME,
+            }
+        )
         this.homeBtn.setInteractive()
     }
 

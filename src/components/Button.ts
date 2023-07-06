@@ -22,21 +22,30 @@ export default class Button {
     ) {
         if (width && height)
             this.rectangle = scene.add
-                .nineslice(x, y, IMAGE.BUTTON_BACKING, undefined, width, height, 10, 10)
+                .nineslice(
+                    x,
+                    y,
+                    IMAGE.BUTTON_BACKING,
+                    undefined,
+                    width,
+                    height,
+                    (10 * scene.cameras.main.width) / 3200,
+                    (10 * scene.cameras.main.width) / 3200
+                )
                 .setDisplaySize(width, height)
                 .setDepth(DEPTH.OBJECT_MEDIUM)
 
         this.text = scene.add
             .text(x, y, content, style)
             .setOrigin(0.5, 0.5)
-            .setStroke('#000000', 3)
+            .setStroke('#000000', (3 * scene.cameras.main.width) / 3200)
             .setDepth(DEPTH.OBJECT_MEDIUM)
         this.isPointerDown = false
 
         this.isPointerOver = false
 
         this.blackRect = scene.add
-            .rectangle(x, y, width, height, 0x0000, 1)
+            .rectangle(x, y, width, height, 0x0000, (1 * scene.cameras.main.width) / 3200)
             .setDisplaySize(width, height)
             .setSize(width, height)
             .setAlpha(0)
