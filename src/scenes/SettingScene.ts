@@ -32,38 +32,84 @@ export default class SettingScene extends Phaser.Scene {
     }
 
     public create(): void {
-        this.add.rectangle(0, 0, 3200, 1600, 0x0000).setOrigin(0, 0).setAlpha(0.8)
+        this.add
+            .rectangle(
+                0,
+                0,
+                (3200 * this.cameras.main.width) / 3200,
+                (1600 * this.cameras.main.width) / 3200,
+                0x0000
+            )
+            .setOrigin(0, 0)
+            .setAlpha(0.8)
 
-        this.add.rectangle(1600, 200, 2800, 1200, 0x1f2944).setOrigin(0.5, 0)
+        this.add
+            .rectangle(
+                (1600 * this.cameras.main.width) / 3200,
+                (200 * this.cameras.main.width) / 3200,
+                (2800 * this.cameras.main.width) / 3200,
+                (1200 * this.cameras.main.width) / 3200,
+                0x1f2944
+            )
+            .setOrigin(0.5, 0)
 
-        this.backBtn = new Button(this, 300, 100, 200, 80, 'BACK', {
-            color: '#ffffff',
-            fontSize: '40px',
-            fontStyle: 'bold',
-            fontFamily: FONT_NAME,
-        })
+        this.backBtn = new Button(
+            this,
+            (300 * this.cameras.main.width) / 3200,
+            (100 * this.cameras.main.width) / 3200,
+            (200 * this.cameras.main.width) / 3200,
+            (80 * this.cameras.main.width) / 3200,
+            'BACK',
+            {
+                color: '#ffffff',
+                fontSize: '40px',
+                fontStyle: 'bold',
+                fontFamily: FONT_NAME,
+            }
+        )
         this.backBtn.setInteractive()
 
-        this.plusBtn = new Button(this, 2000, 800, 230, 230, '+', {
-            color: '#ffffff',
-            fontSize: '130px',
-            fontStyle: 'bold',
-        })
+        this.plusBtn = new Button(
+            this,
+            (2000 * this.cameras.main.width) / 3200,
+            (800 * this.cameras.main.width) / 3200,
+            (230 * this.cameras.main.width) / 3200,
+            (230 * this.cameras.main.width) / 3200,
+            '+',
+            {
+                color: '#ffffff',
+                fontSize: '130px',
+                fontStyle: 'bold',
+            }
+        )
         this.plusBtn.setInteractive()
 
-        this.minusBtn = new Button(this, 1200, 800, 230, 230, '-', {
-            color: '#ffffff',
-            fontSize: '130px',
-            fontStyle: 'bold',
-        })
+        this.minusBtn = new Button(
+            this,
+            (1200 * this.cameras.main.width) / 3200,
+            (800 * this.cameras.main.width) / 3200,
+            (230 * this.cameras.main.width) / 3200,
+            (230 * this.cameras.main.width) / 3200,
+            '-',
+            {
+                color: '#ffffff',
+                fontSize: '130px',
+                fontStyle: 'bold',
+            }
+        )
         this.minusBtn.setInteractive()
 
         this.volumeValue = this.add
-            .text(1600, 800, String(Math.ceil(Volume.value * 100)), {
-                fontSize: '130px',
-                fontStyle: 'bold',
-                fontFamily: FONT_NAME,
-            })
+            .text(
+                (1600 * this.cameras.main.width) / 3200,
+                (800 * this.cameras.main.width) / 3200,
+                String(Math.ceil(Volume.value * 100)),
+                {
+                    fontSize: '130px',
+                    fontStyle: 'bold',
+                    fontFamily: FONT_NAME,
+                }
+            )
             .setDepth(DEPTH.OBJECT_MEDIUM)
             .setOrigin(0.5, 0.5)
     }

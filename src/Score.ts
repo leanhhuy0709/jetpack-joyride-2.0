@@ -7,14 +7,20 @@ export default class Score extends Phaser.GameObjects.Text {
     private level: number
 
     public constructor(scene: Phaser.Scene) {
-        super(scene, 10, 60, '0', {})
-        
+        super(
+            scene,
+            (10 * scene.cameras.main.width) / 3200,
+            (60 * scene.cameras.main.width) / 3200,
+            '0',
+            {}
+        )
+
         this.scene.add.existing(this)
 
         this.setFontSize('80px')
         this.setColor('#ffffff')
         this.setFontFamily(FONT_NAME)
-        this.setStroke('#000000', 5)
+        this.setStroke('#000000', (5 * scene.cameras.main.width) / 3200)
         this.setDepth(DEPTH.OBJECT_VERYLOW)
 
         this.score = 0
@@ -36,7 +42,7 @@ export default class Score extends Phaser.GameObjects.Text {
 
     public setNewScore(): void {
         this.setText(`${Math.floor(this.score)}`)
-        this.x = this.scene.cameras.main.scrollX + 10
+        this.x = this.scene.cameras.main.scrollX + (10 * this.scene.cameras.main.width) / 3200
     }
 
     public resetScore(): void {
