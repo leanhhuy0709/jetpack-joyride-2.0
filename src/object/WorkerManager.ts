@@ -9,17 +9,26 @@ export default class WorkerManager {
     public constructor(scene: Phaser.Scene, numWorker: number) {
         this.scene = scene
         this.workers = []
-        let tmp = 4000
+        let tmp = (4000 * this.scene.cameras.main.width) / 3200
         for (let i = 0; i < numWorker; i++) {
-            this.workers.push(ObjectPool.getWorker(scene, tmp, 1200).setVisible(false))
-            tmp += Phaser.Math.Between(100, 1000)
+            this.workers.push(
+                ObjectPool.getWorker(
+                    scene,
+                    tmp,
+                    (1250 * this.scene.cameras.main.width) / 3200
+                ).setVisible(false)
+            )
+            tmp += (Phaser.Math.Between(100, 1000) * this.scene.cameras.main.width) / 3200
         }
     }
 
     public update(delta: number, player: Player): void {
         let numWorkerRemoved = 0
         for (let i = 0; i < this.workers.length; i++) {
-            if (this.workers[i].minX() < this.scene.cameras.main.scrollX + 3200) {
+            if (
+                this.workers[i].minX() <
+                this.scene.cameras.main.scrollX + this.scene.cameras.main.width
+            ) {
                 this.workers[i].setVisible(true)
             }
             this.workers[i].update(delta, player)
@@ -33,10 +42,19 @@ export default class WorkerManager {
                 ObjectPool.removeWorker(this.workers[i])
             }
             this.workers = []
-            let tmp = this.scene.cameras.main.scrollX + 3200 + Phaser.Math.Between(100, 1000)
+            let tmp =
+                this.scene.cameras.main.scrollX +
+                this.scene.cameras.main.width +
+                (Phaser.Math.Between(100, 1000) * this.scene.cameras.main.width) / 3200
             for (let i = 0; i < numWorkerRemoved; i++) {
-                this.workers.push(ObjectPool.getWorker(this.scene, tmp, 1200))
-                tmp += Phaser.Math.Between(100, 1000)
+                this.workers.push(
+                    ObjectPool.getWorker(
+                        this.scene,
+                        tmp,
+                        (1250 * this.scene.cameras.main.width) / 3200
+                    )
+                )
+                tmp += (Phaser.Math.Between(100, 1000) * this.scene.cameras.main.width) / 3200
             }
         }
     }
@@ -44,7 +62,6 @@ export default class WorkerManager {
     public handleCollider(player: Player): void {
         for (let i = 0; i < this.workers.length; i++) {
             this.workers[i].handleCollider(player)
-            
         }
     }
 
@@ -55,10 +72,19 @@ export default class WorkerManager {
                 this.workers.pop()
             }
         } else if (this.workers.length < num) {
-            let tmp = this.scene.cameras.main.scrollX + 3200 + Phaser.Math.Between(100, 1000)
+            let tmp =
+                this.scene.cameras.main.scrollX +
+                this.scene.cameras.main.width +
+                (Phaser.Math.Between(100, 1000) * this.scene.cameras.main.width) / 3200
             for (let i = this.workers.length; i < num; i++) {
-                this.workers.push(ObjectPool.getWorker(this.scene, tmp, 1200))
-                tmp += Phaser.Math.Between(100, 1000)
+                this.workers.push(
+                    ObjectPool.getWorker(
+                        this.scene,
+                        tmp,
+                        (1250 * this.scene.cameras.main.width) / 3200
+                    )
+                )
+                tmp += (Phaser.Math.Between(100, 1000) * this.scene.cameras.main.width) / 3200
             }
         }
     }
