@@ -12,9 +12,14 @@ export default class GravityBelt extends Equipment {
         super(player)
 
         this.gravity_effect = this.player.scene.add
-            .sprite(1000, 1000, SPRITE.ROCKET_EFFECT, 5)
+            .sprite(
+                (1000 * this.player.scene.cameras.main.height) / 1600,
+                (1000 * this.player.scene.cameras.main.height) / 1600,
+                SPRITE.ROCKET_EFFECT,
+                5
+            )
             .setDepth(DEPTH.OBJECT_MEDIUM)
-            .setScale(3.5)
+            .setScale((3.5 * this.player.scene.cameras.main.height) / 1600)
             .setAngle(-90)
             .setVisible(false)
 
@@ -47,7 +52,8 @@ export default class GravityBelt extends Equipment {
             this.player.y + this.transitionY
         )
 
-        if (this.player.playerState != PLAYER_STATE.FALLING || !this.player.visible) this.gravity_effect.setVisible(false)
+        if (this.player.playerState != PLAYER_STATE.FALLING || !this.player.visible)
+            this.gravity_effect.setVisible(false)
         else this.gravity_effect.setVisible(true)
 
         const gravity = this.player.scene.matter.world.localWorld.gravity.y
