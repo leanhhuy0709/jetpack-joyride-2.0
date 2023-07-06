@@ -13,30 +13,41 @@ export default class ProductTexture {
         this.scene = scene
         this.product = product
 
-        const rect = scene.add.rectangle(200, 0, 150, 150, 0x7086a7).setOrigin(0.5, 0.5)
+        const rect = scene.add
+            .rectangle(
+                (200 * scene.cameras.main.width) / 3200,
+                0,
+                (150 * scene.cameras.main.width) / 3200,
+                (150 * scene.cameras.main.width) / 3200,
+                0x7086a7
+            )
+            .setOrigin(0.5, 0.5)
 
         const image = scene.add
-            .image(200, 0, product.getImageKey())
-            .setDisplaySize(75, 75)
+            .image((200 * scene.cameras.main.width) / 3200, 0, product.getImageKey())
+            .setDisplaySize(
+                (75 * scene.cameras.main.width) / 3200,
+                (75 * scene.cameras.main.width) / 3200
+            )
             .setOrigin(0.5, 0.5)
 
         const name = scene.add
-            .text(500, 0, product.getName(), {
+            .text((500 * scene.cameras.main.width) / 3200, 0, product.getName(), {
                 fontSize: '60px',
                 fontStyle: 'bold',
                 fontFamily: FONT_NAME,
             })
-            .setStroke('#000000', 5)
+            .setStroke('#000000', (5 * scene.cameras.main.width) / 3200)
             .setOrigin(0.5, 0.5)
 
         const price = scene.add
-            .text(width - 500, 0, String(product.getPrice()), {
+            .text(width - (500 * scene.cameras.main.width) / 3200, 0, String(product.getPrice()), {
                 fontSize: '60px',
                 fontStyle: 'bold',
                 fontFamily: FONT_NAME,
                 color: '#FFF0C8',
             })
-            .setStroke('#000000', 5)
+            .setStroke('#000000', (5 * scene.cameras.main.width) / 3200)
             .setOrigin(0.5, 0.5)
 
         const description = scene.add
@@ -44,7 +55,7 @@ export default class ProductTexture {
                 fontSize: '60px',
                 fontFamily: FONT_NAME,
             })
-            .setStroke('#000000', 5)
+            .setStroke('#000000', (5 * scene.cameras.main.width) / 3200)
             .setOrigin(0.5, 0.5)
 
         let content: string
@@ -60,15 +71,31 @@ export default class ProductTexture {
                 content = 'BUY'
                 break
         }
-        this.button = new Button(scene, width - 200, 0, 200, 80, content, {
-            color: '#ffffff',
-            fontSize: '40px',
-            fontStyle: 'bold',
-            fontFamily: FONT_NAME,
-        })
+        this.button = new Button(
+            scene,
+            width - (200 * scene.cameras.main.width) / 3200,
+            0,
+            (200 * scene.cameras.main.width) / 3200,
+            (80 * scene.cameras.main.width) / 3200,
+            content,
+            {
+                color: '#ffffff',
+                fontSize: '40px',
+                fontStyle: 'bold',
+                fontFamily: FONT_NAME,
+            }
+        )
         this.button.setInteractive()
 
-        const line = scene.add.rectangle(0, 120, width, 5, 0xffffff).setOrigin(0, 0)
+        const line = scene.add
+            .rectangle(
+                0,
+                (120 * scene.cameras.main.width) / 3200,
+                width,
+                (5 * scene.cameras.main.width) / 3200,
+                0xffffff
+            )
+            .setOrigin(0, 0)
 
         this.container = scene.add.container(x, y, [
             rect,
