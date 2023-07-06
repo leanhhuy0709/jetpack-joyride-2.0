@@ -162,4 +162,11 @@ export default class Rocket extends Obstacle {
         this.fire.setVisible(false)
         this.alert.setVisible(true)
     }
+
+    public setVisible(visible: boolean): Rocket {
+        this.rect.setVisible(visible)
+        this.fire.setVisible(visible)
+        this.alert.setVisible(visible)
+        return this
+    }
 }

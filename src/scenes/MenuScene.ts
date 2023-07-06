@@ -44,10 +44,6 @@ export default class MenuScene extends Phaser.Scene {
         })
     }
 
-    public preload(): void {
-        //
-    }
-
     public create(): void {
         this.add
             .image(2155, 0, IMAGE.MID_ROOM)
@@ -152,7 +148,6 @@ export default class MenuScene extends Phaser.Scene {
 
     public update(): void {
         //Check button first ... else ...
-
         this.music.setVolume(Volume.value)
 
         this.coinRect.getText().setText(String(UserData.getAllCoin()))
@@ -172,14 +167,14 @@ export default class MenuScene extends Phaser.Scene {
         if (this.shopBtn.getIsPointerDown()) {
             this.shopBtn.setIsPointerDown(false)
             this.scene.pause(SCENE.MENU)
-            this.scene.launch(SCENE.SHOP, {type: 'product'})
+            this.scene.launch(SCENE.SHOP, { type: 'product' })
             return
         }
 
         if (this.costumesBtn.getIsPointerDown()) {
             this.costumesBtn.setIsPointerDown(false)
             this.scene.pause(SCENE.MENU)
-            this.scene.launch(SCENE.SHOP, {type: 'costume'})
+            this.scene.launch(SCENE.SHOP, { type: 'costume' })
             return
         }
 

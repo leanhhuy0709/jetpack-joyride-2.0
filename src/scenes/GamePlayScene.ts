@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable unused-imports/no-unused-imports */
 import * as Phaser from 'phaser'
 import { AUDIO, FONT_NAME, IMAGE, SCENE, SPRITE, TILEMAP } from '../const/const'
 import Player, { PLAYER_STATE } from '../object/Player'
@@ -9,13 +11,11 @@ import WorkerManager from '../object/WorkerManager'
 import ZapCoinManager, { DEFAULT_SAFE_DISTACE } from '../object/ZapCoinManager'
 import ObjectPool from '../object/ObjectPool'
 import Volume from '../object/Volume'
-import UserData from '../object/shop/UserData'
 import TileMap from '../object/background/TileMap'
+import UserData from '../object/shop/UserData'
 
 export default class GamePlayScene extends Phaser.Scene {
     private player: Player
-
-    private background: Background
 
     private cursors: {
         left: Phaser.Input.Keyboard.Key
@@ -43,8 +43,6 @@ export default class GamePlayScene extends Phaser.Scene {
 
     public ground: MatterJS.BodyType
     public ground2: MatterJS.BodyType
-
-    private fpsText: Phaser.GameObjects.Text
 
     private tileMap: TileMap
 
@@ -97,15 +95,6 @@ export default class GamePlayScene extends Phaser.Scene {
         this.player.loadUserData()
         this.music = this.sound.add(AUDIO.MUSIC_GAMEPLAY, { volume: Volume.value })
         this.music.play()
-
-        this.fpsText = this.add
-            .text(3200, 100, '100fps', {
-                fontSize: '80px',
-                fontStyle: 'bold',
-                fontFamily: FONT_NAME,
-            })
-            .setDepth(DEPTH.OBJECT_VERYHIGH)
-            .setOrigin(1, 0)
     }
 
     public update(_time: number, delta: number): void {
@@ -166,7 +155,7 @@ export default class GamePlayScene extends Phaser.Scene {
                 this.tweens.add({
                     targets: dead,
                     x: this.player.x + 500 * sp,
-                    y: 1350,
+                    y: 1450,
                     angle: 90,
                     duration: 500,
                     onComplete: () => {
@@ -200,17 +189,6 @@ export default class GamePlayScene extends Phaser.Scene {
                 DEFAULT_SAFE_DISTACE + this.player.getSpeed() * 30
             )
         }
-
-        if (this.matter.config.debug) {
-            const debug = this.matter.config.debug as Phaser.Types.Physics.Matter.MatterDebugConfig
-
-            if (debug.showBody) this.fpsText.setVisible(true)
-            else this.fpsText.setVisible(false)
-        }
-
-        this.fpsText
-            .setText(`FPS: ${Math.floor(this.game.loop.actualFps)}`)
-            .setPosition(this.cameras.main.scrollX + 3200, 100)
     }
 
     private evaluateSmokeYPosition(x: number, offset: number, coef: number): number {

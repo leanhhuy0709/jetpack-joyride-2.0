@@ -30,16 +30,6 @@ export default class LoadingScene extends Phaser.Scene {
             frameHeight: 95,
         })
 
-        this.load.spritesheet(SPRITE.BARRY_BODY, SPRITE.BARRY_BODY, {
-            frameWidth: 32,
-            frameHeight: 32,
-        })
-
-        this.load.spritesheet(SPRITE.BARRY_HEAD, SPRITE.BARRY_HEAD, {
-            frameWidth: 32,
-            frameHeight: 32,
-        })
-
         this.load.spritesheet(SPRITE.EXPLOSION, SPRITE.EXPLOSION, {
             frameWidth: 64,
             frameHeight: 64,
@@ -108,11 +98,6 @@ export default class LoadingScene extends Phaser.Scene {
         })
 
         this.load.spritesheet(SPRITE.WORKER_FAT_BODY, SPRITE.WORKER_FAT_BODY, {
-            frameWidth: 128 / 4,
-            frameHeight: 256 / 8,
-        })
-
-        this.load.spritesheet(SPRITE.WORKER_TALL_BODY, SPRITE.WORKER_TALL_BODY, {
             frameWidth: 128 / 4,
             frameHeight: 256 / 8,
         })

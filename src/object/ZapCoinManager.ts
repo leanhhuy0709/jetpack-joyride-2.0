@@ -31,7 +31,7 @@ export default class ZapCoinManager {
                 this.coins.push(coin)
                 tmp = coin.getMaxX() + Phaser.Math.Between(300, 600)
             } else {
-                const zap = ObjectPool.getZap(scene, 0, 0, 0, 0)
+                const zap = ObjectPool.getZap(scene, 0, 0, 0, 0).setVisible(false)
                 zap.reset(tmp)
                 this.zaps.push(zap)
                 tmp =
@@ -68,6 +68,10 @@ export default class ZapCoinManager {
     public update(delta: number): void {
         let numRemoved = 0
         for (let i = 0; i < this.zaps.length; i++) {
+            if (this.zaps[i].minX() < this.scene.cameras.main.scrollX + 3300)
+            {
+                this.zaps[i].setVisible(true)
+            }
             this.zaps[i].update(delta)
         }
         for (let i = 0; i < this.zaps.length; i++) {
@@ -80,6 +84,9 @@ export default class ZapCoinManager {
         if (numRemoved) this.zaps.splice(0, numRemoved)
 
         for (let i = 0; i < this.coins.length; i++) {
+            if (this.coins[i].getMinX() < this.scene.cameras.main.scrollX + 3200) {
+                this.coins[i].setVisible(true)
+            }
             if (this.coins[i].getMaxX() < this.scene.cameras.main.scrollX) {
                 ObjectPool.removeCoin(this.coins[i])
                 this.coins.splice(i, 1)

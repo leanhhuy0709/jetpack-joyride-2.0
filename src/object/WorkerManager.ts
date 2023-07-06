@@ -11,7 +11,7 @@ export default class WorkerManager {
         this.workers = []
         let tmp = 4000
         for (let i = 0; i < numWorker; i++) {
-            this.workers.push(ObjectPool.getWorker(scene, tmp, 1200))
+            this.workers.push(ObjectPool.getWorker(scene, tmp, 1200).setVisible(false))
             tmp += Phaser.Math.Between(100, 1000)
         }
     }
@@ -19,9 +19,13 @@ export default class WorkerManager {
     public update(delta: number, player: Player): void {
         let numWorkerRemoved = 0
         for (let i = 0; i < this.workers.length; i++) {
+            if (this.workers[i].minX() < this.scene.cameras.main.scrollX + 3200) {
+                this.workers[i].setVisible(true)
+            }
             this.workers[i].update(delta, player)
-            if (this.workers[i].getMaxX() < this.scene.cameras.main.scrollX) {
+            if (this.workers[i].maxX() < this.scene.cameras.main.scrollX) {
                 numWorkerRemoved++
+                this.workers[i].setVisible(false)
             }
         }
         if (numWorkerRemoved == this.workers.length) {

@@ -18,7 +18,7 @@ export default class ObjectPool {
 
     public static init(scene: Phaser.Scene): void {
         ObjectPool.clear()
-        for (let i = 0; i < 5; i++) {
+        for (let i = 0; i < 0; i++) {
             ObjectPool.removeBullet(new Bullet(scene, 100, 100, IMAGE.BULLET))
             ObjectPool.removeExplosion(new Explosion(scene, 100, 100, SPRITE.EXPLOSION))
             ObjectPool.removeZap(new Zap(scene, -100, -100, -100, -100))
@@ -26,12 +26,12 @@ export default class ObjectPool {
         }
 
         const randomPattern = []
-
+        
         for (let i = 0; i < COIN_PATTERN.length; i++) {
             randomPattern.push(i)
         }
 
-        randomPattern.sort((_a, _b) => Math.random() - 0.5)
+        //randomPattern.sort((_a, _b) => Math.random() - 0.5)
 
         for (let i = 0; i < COIN_PATTERN.length; i++) {
             const coin = new Coin(scene, 110, 110, randomPattern[i]).setVisible(false)
@@ -73,6 +73,7 @@ export default class ObjectPool {
         if (ObjectPool.zaps.length > 0) {
             const zap = ObjectPool.zaps.pop() as Zap
             zap.setAll(scene, x1, y1, x2, y2)
+            zap.setVisible(true)
             return zap
         }
         ObjectPool.count++
@@ -80,6 +81,7 @@ export default class ObjectPool {
     }
 
     public static removeZap(zap: Zap): void {
+        zap.setVisible(false)
         ObjectPool.zaps.push(zap)
     }
 
@@ -111,6 +113,7 @@ export default class ObjectPool {
     }
 
     public static removeCoin(coin: Coin): void {
+        coin.setVisible(false)
         ObjectPool.coins.push(coin)
     }
 
@@ -118,6 +121,7 @@ export default class ObjectPool {
         if (ObjectPool.rockets.length > 0) {
             const rocket = ObjectPool.rockets.pop() as Rocket
             rocket.setAll(scene, x, y)
+            rocket.setVisible(true)
             return rocket
         }
         ObjectPool.count++
@@ -125,6 +129,7 @@ export default class ObjectPool {
     }
 
     public static removeRocket(rocket: Rocket): void {
+        rocket.setVisible(false)
         ObjectPool.rockets.push(rocket)
     }
 

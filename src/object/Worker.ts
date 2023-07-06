@@ -260,12 +260,17 @@ export default class Worker {
         }
     }
 
-    public getMaxX(): number {
+    public maxX(): number {
         return this.body.x + this.body.width
     }
 
-    public setVisible(visible: boolean): void {
+    public minX(): number {
+        return this.body.x
+    }
+
+    public setVisible(visible: boolean): Worker {
         this.body.setVisible(visible)
         this.head.setVisible(visible)
+        return this
     }
 }

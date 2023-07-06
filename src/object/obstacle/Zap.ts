@@ -264,4 +264,15 @@ export default class Zap extends Obstacle {
 
         if (this.hardChance > 0.3) this.hardChance = 0.3
     }
+
+    public setVisible(visible: boolean): Zap {
+        if (this.sprite1.visible == visible) return this
+
+        this.sprite1.setVisible(visible)
+        this.sprite2.setVisible(visible)
+        this.glow1.setVisible(visible)
+        this.glow2.setVisible(visible)
+        this.rect.setVisible(visible)
+        return this
+    }
 }

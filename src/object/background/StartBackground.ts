@@ -6,19 +6,35 @@ export default class StartBackground {
         scene.add
             .image(x, 0, IMAGE.START_ROOM)
             .setOrigin(0, 200 / 1600)
-            .setCrop(0, 200, 1749, 1200)
-            .setDisplaySize((1749 * 1600) / 1200, (1600 * 1600) / 1200)
+            .setCrop(
+                0,
+                200,
+                (1749 * scene.cameras.main.width) / 3200,
+                (1200 * scene.cameras.main.height) / 1600
+            )
+            .setDisplaySize(
+                (((1749 * 1600) / 1200) * scene.cameras.main.width) / 3200,
+                (((1600 * 1600) / 1200) * scene.cameras.main.height) / 1600
+            )
             .setDepth(DEPTH.BACKGROUND_VERYHIGH)
 
         scene.add
-            .image(1600 + x, 600, IMAGE.ALARM_LIGHT)
+            .image(
+                scene.cameras.main.width / 2 + x,
+                (600 / 1600) * scene.cameras.main.height,
+                IMAGE.ALARM_LIGHT
+            )
             .setDepth(DEPTH.BACKGROUND_VERYHIGH)
-            .setScale(1.5)
+            .setScale((1.5 / 1600) * scene.cameras.main.height)
         if (isAlarmLightPlay) {
             const alarmLightSprite = scene.add
-                .sprite(1470 + x, 710, SPRITE.ALARM_LIGHT_EFFECT)
+                .sprite(
+                    (1470 * scene.cameras.main.width) / 3200 + x,
+                    (710 * scene.cameras.main.height) / 1600,
+                    SPRITE.ALARM_LIGHT_EFFECT
+                )
                 .setDepth(DEPTH.BACKGROUND_VERYHIGH)
-                .setScale(1.5)
+                .setScale((1.5 / 1600) * scene.cameras.main.height)
 
             if (!scene.anims.exists('alarm-light-turn'))
                 scene.anims.create({
@@ -34,42 +50,71 @@ export default class StartBackground {
         }
 
         scene.add
-            .image(1200 + x, 1150, IMAGE.BEST_SCREEN)
+            .image(
+                (1200 / 3200) * scene.cameras.main.width + x,
+                (1150 / 1600) * scene.cameras.main.height,
+                IMAGE.BEST_SCREEN
+            )
             .setDepth(DEPTH.BACKGROUND_VERYHIGH)
-            .setScale(1.5)
+            .setScale((1.5 * scene.cameras.main.height) / 1600)
 
         scene.add
-            .image(500 + x, 400, IMAGE.LIGHT)
+            .image(
+                (500 * scene.cameras.main.width) / 3200 + x,
+                (400 * scene.cameras.main.height) / 1600,
+                IMAGE.LIGHT
+            )
             .setDepth(DEPTH.BACKGROUND_VERYHIGH)
-            .setScale(1.7)
+            .setScale((1.7 * scene.cameras.main.height) / 1600)
 
         scene.add
-            .image(510 + x, 1365, IMAGE.LIGHT_EFFECT_1)
+            .image(
+                (510 * scene.cameras.main.width) / 3200 + x,
+                (1365 * scene.cameras.main.height) / 1600,
+                IMAGE.LIGHT_EFFECT_1
+            )
             .setDepth(DEPTH.BACKGROUND_VERYHIGH)
-            .setScale(1.7)
+            .setScale((1.7 * scene.cameras.main.height) / 1600)
         scene.add
-            .image(500 + x, 525, IMAGE.LIGHT_EFFECT_2)
+            .image(
+                (500 * scene.cameras.main.width) / 3200 + x,
+                (525 * scene.cameras.main.height) / 1600,
+                IMAGE.LIGHT_EFFECT_2
+            )
             .setDepth(DEPTH.BACKGROUND_VERYHIGH)
-            .setScale(1.7)
+            .setScale((1.7 * scene.cameras.main.height) / 1600)
 
         scene.add
-            .image(600 + x, 1220, IMAGE.TABLE)
+            .image(
+                (600 * scene.cameras.main.width) / 3200 + x,
+                (1220 * scene.cameras.main.height) / 1600,
+                IMAGE.TABLE
+            )
             .setDepth(DEPTH.BACKGROUND_VERYHIGH)
-            .setScale(4.4)
+            .setScale((4.4 * scene.cameras.main.height) / 1600)
         scene.add
-            .image(610 + x, 1120, IMAGE.RADIO)
+            .image(
+                (610 * scene.cameras.main.width) / 3200 + x,
+                (1120 * scene.cameras.main.height) / 1600,
+                IMAGE.RADIO
+            )
             .setDepth(DEPTH.BACKGROUND_VERYHIGH)
-            .setScale(2)
+            .setScale((2 * scene.cameras.main.height) / 1600)
 
         let highScore = 0
         if (localStorage.getItem('highscore'))
             highScore = parseInt(localStorage.getItem('highscore') as string)
 
         scene.add
-            .text(x + 1200, 1110, `BEST ${highScore}`, {
-                fontSize: '40px',
-                fontFamily: FONT_NAME,
-            })
+            .text(
+                x + (1200 * scene.cameras.main.width) / 3200,
+                (1110 * scene.cameras.main.height) / 1600,
+                `BEST ${highScore}`,
+                {
+                    fontSize: '40px',
+                    fontFamily: FONT_NAME,
+                }
+            )
             .setDepth(DEPTH.OBJECT_MEDIUM)
             .setOrigin(0.5, 0)
     }

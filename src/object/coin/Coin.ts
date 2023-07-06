@@ -107,9 +107,12 @@ export default class Coin {
         return this.maxY
     }
 
-    public setVisible(isVisible: boolean): Coin {
+    public setVisible(visible: boolean): Coin {
+
+        if (this.coins[0].visible == visible) return this
+
         for (let i = 0; i < this.coins.length; i++) {
-            this.coins[i].setVisible(isVisible)
+            this.coins[i].setVisible(visible)
         }
         return this
     }

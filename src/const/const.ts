@@ -12,22 +12,11 @@ export enum SCENE {
 export const FONT_NAME = 'New Athletic M54'
 
 export const COIN_PATTERN = [
-    'assets/coin/patterns/coinPattern0.txt',
-    'assets/coin/patterns/coinPattern1.txt',
-    'assets/coin/patterns/coinPattern2.txt',
-    'assets/coin/patterns/coinPattern3.txt',
-    'assets/coin/patterns/coinPattern4.txt',
-    'assets/coin/patterns/coinPattern5.txt',
-    'assets/coin/patterns/coinPattern6.txt',
-    'assets/coin/patterns/coinPattern7.txt',
-    'assets/coin/patterns/coinPattern8.txt',
-    'assets/coin/patterns/coinPattern9.txt',
+    'assets/coin/patterns/coinPattern0.txt'
 ]
 
 export enum SPRITE {
     BARRY_SPRITE_SHEET = 'assets/barry/spritesheet.png',
-    BARRY_BODY = 'assets/Characters/Barry/defaultBody.png',
-    BARRY_HEAD = 'assets/Characters/Barry/defaultHead.png',
     BULLET_FLASH = 'assets/bullet/bullet-flash.png',
     EXPLOSION = 'assets/bullet/explosion-sprite.png',
     ORB_ANIM = 'assets/zap/orbAnim.png',
@@ -45,7 +34,6 @@ export enum SPRITE {
     WORKER_2_BODY = 'assets/workers/worker2Body.png',
     WORKER_2_HEAD = 'assets/workers/worker2Head.png',
     WORKER_FAT_BODY = 'assets/workers/workerFatBody.png',
-    WORKER_TALL_BODY = 'assets/workers/workerTallBody.png',
     DAN_SPRITE_SHEET = 'assets/dan/spritesheet.png',
 }
 
