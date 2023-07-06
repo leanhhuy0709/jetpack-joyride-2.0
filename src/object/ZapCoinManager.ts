@@ -84,9 +84,6 @@ export default class ZapCoinManager {
         if (numRemoved) this.zaps.splice(0, numRemoved)
 
         for (let i = 0; i < this.coins.length; i++) {
-            if (this.coins[i].getMinX() < this.scene.cameras.main.scrollX + this.scene.cameras.main.width) {
-                this.coins[i].setVisible(true)
-            }
             if (this.coins[i].getMaxX() < this.scene.cameras.main.scrollX) {
                 ObjectPool.removeCoin(this.coins[i])
                 this.coins.splice(i, 1)

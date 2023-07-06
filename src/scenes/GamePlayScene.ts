@@ -118,9 +118,9 @@ export default class GamePlayScene extends Phaser.Scene {
 
         if (this.input.keyboard) this.cursors = this.input.keyboard.createCursorKeys()
 
-        this.rocketManager = new RocketManager(this, 3)
-        this.workerManager = new WorkerManager(this, 5)
-        this.zapCoinManager = new ZapCoinManager(this, 5)
+        this.rocketManager = new RocketManager(this, 2)
+        this.workerManager = new WorkerManager(this, 3)
+        this.zapCoinManager = new ZapCoinManager(this, 3)
 
         this.score = new Score(this)
 
@@ -238,7 +238,7 @@ export default class GamePlayScene extends Phaser.Scene {
             )
         }
     }
-
+    
     private evaluateSpeed(score: number, init: number): number {
         return Math.log10((0.5 * score) / 1000 + 1) + init
     }

@@ -113,7 +113,6 @@ export default class ObjectPool {
     }
 
     public static removeCoin(coin: Coin): void {
-        coin.setVisible(false)
         ObjectPool.coins.push(coin)
     }
 

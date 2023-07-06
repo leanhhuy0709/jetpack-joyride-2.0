@@ -21,6 +21,7 @@ export default class TileMap {
 
         for (let i = 0; i < maps.length; i++) {
             this.maps.push(this.scene.make.tilemap({ key: maps[i] }))
+            
             const tmp = this.maps[i].addTilesetImage('ground', IMAGE.TILESET)
             if (tmp) this.tilesets.push(tmp)
             const rect = scene.add
