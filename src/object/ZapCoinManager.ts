@@ -127,7 +127,7 @@ export default class ZapCoinManager {
 
     public setNewCoin(): void {
         this.coinInRoundText.setText(`${this.coinInRound}`)
-        this.coinInRoundText.x = this.scene.cameras.main.scrollX + 10*this.scene.cameras.main.width / 3200
+        this.coinInRoundText.x = this.scene.cameras.main.scrollX + 150
     }
 
     public resetCoin(): void {

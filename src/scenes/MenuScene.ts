@@ -1,9 +1,12 @@
 import * as Phaser from 'phaser'
-import { SCENE, IMAGE, FONT_NAME, AUDIO } from '../const/const'
+import { SCENE, IMAGE, FONT_NAME, AUDIO, TILEMAP } from '../const/const'
 import Button from '../components/Button'
 import { DEPTH } from '../const/depth'
 import UserData from '../object/shop/UserData'
 import Volume from '../object/Volume'
+
+export const tileMaps: string[] = []
+export const colors: number[] = []
 
 export default class MenuScene extends Phaser.Scene {
     private cursors: {
@@ -82,7 +85,7 @@ export default class MenuScene extends Phaser.Scene {
             (100 * this.cameras.main.width) / 3200,
             'ADS',
             {
-                fontSize: 50*this.cameras.main.width / 3200,
+                fontSize: (50 * this.cameras.main.width) / 3200,
                 fontStyle: 'bold',
                 fontFamily: FONT_NAME,
             }
@@ -98,7 +101,7 @@ export default class MenuScene extends Phaser.Scene {
             (100 * this.cameras.main.width) / 3200,
             'SHOP',
             {
-                fontSize: 50*this.cameras.main.width / 3200,
+                fontSize: (50 * this.cameras.main.width) / 3200,
                 fontStyle: 'bold',
                 fontFamily: FONT_NAME,
             }
@@ -114,7 +117,7 @@ export default class MenuScene extends Phaser.Scene {
             (100 * this.cameras.main.width) / 3200,
             'POWER-UPS',
             {
-                fontSize: 50*this.cameras.main.width / 3200,
+                fontSize: (50 * this.cameras.main.width) / 3200,
                 fontStyle: 'bold',
                 fontFamily: FONT_NAME,
             }
@@ -130,7 +133,7 @@ export default class MenuScene extends Phaser.Scene {
             (100 * this.cameras.main.width) / 3200,
             'COSTUMES',
             {
-                fontSize: 50*this.cameras.main.width / 3200,
+                fontSize: (50 * this.cameras.main.width) / 3200,
                 fontStyle: 'bold',
                 fontFamily: FONT_NAME,
             }
@@ -146,7 +149,7 @@ export default class MenuScene extends Phaser.Scene {
             (100 * this.cameras.main.width) / 3200,
             'HALFBRICK',
             {
-                fontSize: 50*this.cameras.main.width / 3200,
+                fontSize: (50 * this.cameras.main.width) / 3200,
                 fontStyle: 'bold',
                 fontFamily: FONT_NAME,
             }
@@ -162,7 +165,7 @@ export default class MenuScene extends Phaser.Scene {
             (100 * this.cameras.main.width) / 3200,
             'PLAY',
             {
-                fontSize: 50*this.cameras.main.width / 3200,
+                fontSize: (50 * this.cameras.main.width) / 3200,
                 fontStyle: 'bold',
                 fontFamily: FONT_NAME,
             }
@@ -191,7 +194,7 @@ export default class MenuScene extends Phaser.Scene {
             (100 * this.cameras.main.width) / 3200,
             String(allCoin),
             {
-                fontSize: 50*this.cameras.main.width / 3200,
+                fontSize: (50 * this.cameras.main.width) / 3200,
                 fontStyle: 'bold',
                 fontFamily: FONT_NAME,
                 color: '#FFF0C8',
@@ -206,7 +209,7 @@ export default class MenuScene extends Phaser.Scene {
             (100 * this.cameras.main.width) / 3200,
             'Setting',
             {
-                fontSize: 50*this.cameras.main.width / 3200,
+                fontSize: (50 * this.cameras.main.width) / 3200,
                 fontStyle: 'bold',
                 fontFamily: FONT_NAME,
             }
@@ -219,6 +222,62 @@ export default class MenuScene extends Phaser.Scene {
 
         this.music = this.sound.add(AUDIO.MUSIC_MENU, { volume: Volume.value })
         this.music.play()
+
+        tileMaps.length = 0
+        colors.length = 0
+        const arr = [1, 2, 3]
+
+        arr.sort((_a, _b) => Math.random() - 0.5)
+
+        for (let i = 0; i < 3; i++) {
+            switch (arr[i]) {
+                case 1:
+                    tileMaps.push(TILEMAP.MAP_1)
+                    colors.push(0xb0e0e6)
+                    break
+                case 2:
+                    tileMaps.push(TILEMAP.MAP_2)
+                    colors.push(0xfec89a)
+                    break
+                case 3:
+                    tileMaps.push(TILEMAP.MAP_3)
+                    colors.push(0xcccccc)
+                    break
+            }
+        }
+
+        const map = this.make.tilemap({ key: tileMaps[0] })
+        const tileset = map.addTilesetImage('ground', IMAGE.TILESET)
+        this.add
+            .rectangle(
+                500,
+                0,
+                (16000 * this.cameras.main.width) / 3200,
+                (1600 * this.cameras.main.height) / 1600,
+                colors[0]
+            )
+            .setOrigin(0, 0)
+            .setDepth(DEPTH.BACKGROUND_LOW)
+            
+        if (tileset)
+            map.createLayer('T1', tileset, 500, 0)
+                ?.setDepth(DEPTH.BACKGROUND_MEDIUM)
+                .setOrigin(0, 0)
+                .setScale((1600 * this.cameras.main.height) / 1600 / 180)
+
+        let tmp = Number(localStorage.getItem('highscore'))
+
+        if (!tmp) tmp = 0
+
+        this.add
+            .text(2500, 300, `Best: ${Math.floor(tmp)}`, {
+                fontFamily: FONT_NAME,
+                fontSize: 60,
+                color: '#ffffff',
+                fontStyle: 'bold',
+            })
+            .setDepth(DEPTH.OBJECT_LOW)
+            .setStroke('#000000', 5)
     }
 
     public update(): void {

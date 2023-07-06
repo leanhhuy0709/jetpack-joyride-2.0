@@ -13,6 +13,7 @@ import ObjectPool from '../object/ObjectPool'
 import Volume from '../object/Volume'
 import TileMap from '../object/background/TileMap'
 import UserData from '../object/shop/UserData'
+import { colors, tileMaps } from './MenuScene'
 
 export default class GamePlayScene extends Phaser.Scene {
     private player: Player
@@ -59,9 +60,20 @@ export default class GamePlayScene extends Phaser.Scene {
     public create(): void {
         this.tileMap = new TileMap(
             this,
-            [TILEMAP.MAP_1, TILEMAP.MAP_2, TILEMAP.MAP_3],
-            [0xb0e0e6, 0xfec89a, 0xcccccc]
+            tileMaps,
+            colors
         )
+
+        let tmp = Number(localStorage.getItem('highscore'))
+
+        if (!tmp) tmp = 0
+
+        this.add.text(2000, 300, `Best: ${Math.floor(tmp)}`, {
+            fontFamily: FONT_NAME,
+            fontSize: 60,
+            color: '#ffffff',
+            fontStyle: 'bold',
+        }).setDepth(DEPTH.OBJECT_LOW).setStroke('#000000', 5)
 
         this.cameras.main.shake(400, new Phaser.Math.Vector2(0.01, 0.01))
 

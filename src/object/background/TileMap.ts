@@ -58,15 +58,21 @@ export default class TileMap {
                 this.scene.cameras.main.scrollX
             ) {
                 this.layers[i].x = this.position
+                this.rects[i].x = this.position
                 this.position += (16000 * this.scene.cameras.main.width) / 3200
             }
 
             if (
-                this.layers[i].x > this.scene.cameras.main.scrollX + this.scene.cameras.main.width &&
+                this.layers[i].x >
+                    this.scene.cameras.main.scrollX + this.scene.cameras.main.width &&
                 this.layers[i].visible
             ) {
                 this.layers[i].setVisible(false)
-            } else if (!this.layers[i].visible) this.layers[i].setVisible(true)
+                this.rects[i].setVisible(false)
+            } else if (!this.layers[i].visible) {
+                this.layers[i].setVisible(true)
+                this.rects[i].setVisible(true)
+            }
         }
     }
 }

@@ -12,7 +12,23 @@ export enum SCENE {
 export const FONT_NAME = 'New Athletic M54'
 
 export const COIN_PATTERN = [
-    'assets/coin/patterns/coinPattern0.txt'
+    'assets/coin/patterns/coinPattern0.txt',
+    'assets/coin/patterns/coinPattern1.txt',
+    'assets/coin/patterns/coinPattern2.txt',
+    'assets/coin/patterns/coinPattern3.txt',
+    'assets/coin/patterns/coinPattern4.txt',
+    'assets/coin/patterns/coinPattern5.txt',
+    'assets/coin/patterns/coinPattern6.txt',
+    'assets/coin/patterns/coinPattern7.txt',
+    'assets/coin/patterns/coinPattern8.txt',
+    'assets/coin/patterns/coinPattern9.txt',
+    'assets/coin/patterns/coinPattern10.txt',
+    'assets/coin/patterns/coinPattern11.txt',
+    'assets/coin/patterns/coinPattern12.txt',
+    'assets/coin/patterns/coinPattern13.txt',
+    'assets/coin/patterns/coinPattern14.txt',
+    'assets/coin/patterns/coinPattern15.txt',
+    'assets/coin/patterns/coinPattern16.txt',
 ]
 
 export enum SPRITE {
