@@ -75,6 +75,8 @@ export enum IMAGE {
     GRAVITY_SUIT = 'assets/equipment/gravity-suit.png',
     BARRY_DEAD = 'assets/barry/barry-dead.png',
     SHADOW = 'assets/barry/effect_shadow.png',
+    TILESET = 'assets/tilemap/tiles/ground.png',
+    TILESET_BG = 'assets/tilemap/tiles/bg.png',
 }
 
 export enum AUDIO {
@@ -83,4 +85,10 @@ export enum AUDIO {
     COIN_COLLECT_3 = 'assets/SFX/Coin/coin_pickup_3.mp3',
     MUSIC_GAMEPLAY = 'assets/music/Music_Level.mp3',
     MUSIC_MENU = 'assets/music/Music_Menu.mp3',
+}
+
+export enum TILEMAP {
+    MAP_1 = 'assets/tilemap/map1.json',
+    MAP_2 = 'assets/tilemap/map2.json',
+    MAP_3 = 'assets/tilemap/map3.json',
 }

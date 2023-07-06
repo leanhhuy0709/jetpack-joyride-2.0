@@ -1,5 +1,5 @@
 import * as Phaser from 'phaser'
-import { AUDIO, FONT_NAME, IMAGE, SCENE, SPRITE } from '../const/const'
+import { AUDIO, FONT_NAME, IMAGE, SCENE, SPRITE, TILEMAP } from '../const/const'
 import Player, { PLAYER_STATE } from '../object/Player'
 import Score from '../Score'
 import Background from '../object/background/Background'
@@ -9,8 +9,8 @@ import WorkerManager from '../object/WorkerManager'
 import ZapCoinManager, { DEFAULT_SAFE_DISTACE } from '../object/ZapCoinManager'
 import ObjectPool from '../object/ObjectPool'
 import Volume from '../object/Volume'
-import StartBackground from '../object/background/StartBackground'
 import UserData from '../object/shop/UserData'
+import TileMap from '../object/background/TileMap'
 
 export default class GamePlayScene extends Phaser.Scene {
     private player: Player
@@ -46,6 +46,8 @@ export default class GamePlayScene extends Phaser.Scene {
 
     private fpsText: Phaser.GameObjects.Text
 
+    private tileMap: TileMap
+
     public constructor() {
         super({
             key: SCENE.GAMEPLAY,
@@ -57,33 +59,11 @@ export default class GamePlayScene extends Phaser.Scene {
     }
 
     public create(): void {
-        // Initialize game objects
-        this.background = new Background(this, IMAGE.MID_ROOM)
-        const midRoom = this.add
-            .image(1655, 0, IMAGE.MID_ROOM)
-            .setOrigin(0, 200 / 1600)
-            .setCrop(0, 200, 2021, 1200)
-            .setDisplaySize((2021 * 1600) / 1200, (1600 * 1600) / 1200)
-            .setDepth(DEPTH.BACKGROUND_MEDIUM)
-
-        const midRoom2 = this.add
-            .image(1655 + (2021 * 1600) / 1200, 0, IMAGE.MID_ROOM)
-            .setOrigin(0, 200 / 1600)
-            .setCrop(0, 200, 2021, 1200)
-            .setDisplaySize((2021 * 1600) / 1200, (1600 * 1600) / 1200)
-            .setDepth(DEPTH.BACKGROUND_MEDIUM)
-
-        const midRoom3 = this.add
-            .image(1655 + (2021 * 1600) / 1200, 0, IMAGE.MID_ROOM)
-            .setOrigin(0, 200 / 1600)
-            .setCrop(0, 200, 2021, 1200)
-            .setDisplaySize((2021 * 1600) / 1200, (1600 * 1600) / 1200)
-            .setDepth(DEPTH.BACKGROUND_MEDIUM)
-
-        this.background.setImage(midRoom, midRoom2, midRoom3)
-        this.background.setWidth((2021 * 1600) / 1200)
-
-        new StartBackground(this, 0, true)
+        this.tileMap = new TileMap(
+            this,
+            [TILEMAP.MAP_1, TILEMAP.MAP_2, TILEMAP.MAP_3],
+            [0xb0e0e6, 0xfec89a, 0xcccccc]
+        )
 
         this.cameras.main.shake(400, new Phaser.Math.Vector2(0.01, 0.01))
 
@@ -91,10 +71,10 @@ export default class GamePlayScene extends Phaser.Scene {
         this.matter.world.setBounds(0, 0, 1000, 1600, 64, false, false, true, true)
         this.matter.world.enabled = true
 
-        this.ground = this.matter.add.rectangle(0, 1500, 1e9, 250, { isStatic: true })
+        this.ground = this.matter.add.rectangle(0, 1500, 1e9, 120, { isStatic: true })
         this.matter.world.add(this.ground)
 
-        this.ground2 = this.matter.add.rectangle(0, 120, 1e9, 250, { isStatic: true })
+        this.ground2 = this.matter.add.rectangle(0, 100, 1e9, 120, { isStatic: true })
         this.matter.world.add(this.ground2)
 
         this.player = new Player(this, 800, 1250, SPRITE.BARRY_SPRITE_SHEET)
@@ -115,7 +95,6 @@ export default class GamePlayScene extends Phaser.Scene {
         this.isTweenDead = false
 
         this.player.loadUserData()
-        this.tweenStart()
         this.music = this.sound.add(AUDIO.MUSIC_GAMEPLAY, { volume: Volume.value })
         this.music.play()
 
@@ -129,87 +108,12 @@ export default class GamePlayScene extends Phaser.Scene {
             .setOrigin(1, 0)
     }
 
-    private tweenStart(): void {
-        this.player.setVisible(false)
-        this.player.setSpeed(0)
-        for (let i = 0; i < 1000; i++) {
-            const scale = Phaser.Math.Between(1, 15)
-            const end = Phaser.Math.Between(2000, 2400)
-            const randomOffset = Phaser.Math.Between(-400, -100)
-            const randomCoef = Phaser.Math.Between(5, 15)
-            const x = Phaser.Math.Between(-300, 300)
-            const smokeImage = this.add
-                .image(x, this.evaluateSmokeYPosition(x, randomOffset, randomCoef), IMAGE.SMOKE)
-                .setDepth(DEPTH.OBJECT_VERYHIGH)
-                .setScale(scale)
-                .setAlpha(Math.random())
-                .setAngle(Phaser.Math.Between(0, 360))
-
-            this.tweens.add({
-                targets: smokeImage,
-                x: end,
-                alpha: 0,
-                duration: Phaser.Math.Between(2000, 4000),
-                delay: Phaser.Math.Between(0, 100),
-                ease: 'Power2',
-                onComplete: () => {
-                    smokeImage.destroy()
-                },
-                onUpdate: () => {
-                    smokeImage.y = this.evaluateSmokeYPosition(
-                        smokeImage.x,
-                        randomOffset,
-                        randomCoef
-                    )
-                    smokeImage.setScale(((end - smokeImage.x) / end) * scale)
-                    if (smokeImage.x >= 800 && smokeImage.y > 1250) smokeImage.alpha = 0
-                },
-            })
-        }
-        const doNotTouch = this.add
-            .image(370, 1300, IMAGE.DO_NOT_TOUCH)
-            .setDepth(DEPTH.OBJECT_VERYHIGH)
-            .setScale(1.7)
-
-        this.tweens.add({
-            targets: doNotTouch,
-            x: 2300,
-            duration: 2000,
-            delay: Phaser.Math.Between(0, 100),
-            onUpdate: () => {
-                doNotTouch.y = this.evaluateSmokeYPosition(doNotTouch.x, -200, 6.5)
-                doNotTouch.setAngle((doNotTouch.x / 2400) * 360 + 90)
-            },
-        })
-
-        const barry = this.add
-            .sprite(100, 1300.05, this.player.texture.key)
-            .setDepth(DEPTH.OBJECT_MEDIUM)
-            .setDisplaySize(140, 160)
-            .play('move')
-
-        this.add.tween({
-            targets: barry,
-            x: 800,
-            duration: 1000,
-            ease: 'Power2',
-            onComplete: () => {
-                this.player.setSpeed(this.player.getDefaultSpeed())
-                this.player.setVisible(true)
-                barry.destroy()
-            },
-        })
-
-        //this.matter.world.autoUpdate = false
-    }
-
     public update(_time: number, delta: number): void {
         this.matter.world.update(_time, delta)
 
-        this.music.setVolume(Volume.value)
-        this.background.update()
-        
+        this.tileMap.update()
 
+        this.music.setVolume(Volume.value)
         if (this.cursors.space?.isDown) {
             this.usingKey = true
             this.usingTouch = false
@@ -234,7 +138,6 @@ export default class GamePlayScene extends Phaser.Scene {
         }
 
         this.player.update(delta)
-        
 
         this.workerManager.update(delta, this.player)
         this.workerManager.handleCollider(this.player)
@@ -252,7 +155,7 @@ export default class GamePlayScene extends Phaser.Scene {
         ) {
             this.player.state = PLAYER_STATE.DEAD
             this.player.getBulletFlash().setVisible(false)
-            
+
             if (!this.isTweenDead) {
                 const dead = this.add
                     .sprite(this.player.x, this.player.y, IMAGE.BARRY_DEAD)
@@ -305,13 +208,9 @@ export default class GamePlayScene extends Phaser.Scene {
             else this.fpsText.setVisible(false)
         }
 
-        
-
         this.fpsText
             .setText(`FPS: ${Math.floor(this.game.loop.actualFps)}`)
             .setPosition(this.cameras.main.scrollX + 3200, 100)
-
-        
     }
 
     private evaluateSmokeYPosition(x: number, offset: number, coef: number): number {

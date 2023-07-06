@@ -1,6 +1,6 @@
 import * as Phaser from 'phaser'
 import { DEPTH } from '../const/depth'
-import { AUDIO, COIN_PATTERN, IMAGE, SCENE, SPRITE } from '../const/const'
+import { AUDIO, COIN_PATTERN, IMAGE, SCENE, SPRITE, TILEMAP } from '../const/const'
 
 export default class LoadingScene extends Phaser.Scene {
     private progressBar: Phaser.GameObjects.Graphics
@@ -133,6 +133,10 @@ export default class LoadingScene extends Phaser.Scene {
         for (const value of Object.values(AUDIO)) {
             this.load.audio(value, value)
         }
+
+        this.load.tilemapTiledJSON(TILEMAP.MAP_1, TILEMAP.MAP_1)
+        this.load.tilemapTiledJSON(TILEMAP.MAP_2, TILEMAP.MAP_2)
+        this.load.tilemapTiledJSON(TILEMAP.MAP_3, TILEMAP.MAP_3)
     }
 
     public create(): void {

@@ -57,7 +57,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         this.canFireBullet = true
 
         this.shadow = scene.add
-            .sprite(x, y + 120, IMAGE.SHADOW)
+            .sprite(x, y + 200, IMAGE.SHADOW)
             .setDepth(DEPTH.OBJECT_MEDIUM)
             .setScale(3)
             .setAlpha(0)
@@ -133,7 +133,6 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
             }
         }
     }
-
     public update(delta: number): void {
         super.update()
         const gpScene = this.scene as GamePlayScene

@@ -114,7 +114,7 @@ export default class Worker {
         this.headTranslationY = -43
 
         this.shadow = scene.add
-            .sprite(x, y + 160, IMAGE.SHADOW)
+            .sprite(x, y + 230, IMAGE.SHADOW)
             .setDepth(DEPTH.OBJECT_LOW)
             .setScale(3)
             .setAlpha(0)
