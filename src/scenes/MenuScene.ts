@@ -248,6 +248,7 @@ export default class MenuScene extends Phaser.Scene {
 
         const map = this.make.tilemap({ key: tileMaps[0] })
         const tileset = map.addTilesetImage('ground', IMAGE.TILESET)
+
         this.add
             .rectangle(
                 500,
@@ -258,7 +259,7 @@ export default class MenuScene extends Phaser.Scene {
             )
             .setOrigin(0, 0)
             .setDepth(DEPTH.BACKGROUND_LOW)
-            
+
         if (tileset)
             map.createLayer('T1', tileset, 500, 0)
                 ?.setDepth(DEPTH.BACKGROUND_MEDIUM)
@@ -373,10 +374,8 @@ export default class MenuScene extends Phaser.Scene {
                 scrollX: (500 * this.cameras.main.width) / 3200,
                 duration: 500,
                 onComplete: () => {
-                    setTimeout(() => {
-                        this.music.stop()
-                        this.scene.start(SCENE.GAMEPLAY)
-                    }, 200)
+                    this.music.stop()
+                    this.scene.start(SCENE.GAMEPLAY)
                 },
             })
         }

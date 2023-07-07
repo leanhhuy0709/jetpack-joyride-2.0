@@ -23,7 +23,7 @@ export default class Rocket extends Obstacle {
                 (50 * scene.cameras.main.height) / 1600
             )
             .setStatic(true)
-            .setDepth(DEPTH.OBJECT_MEDIUM)
+            .setDepth(DEPTH.OBJECT_HIGH)
             .setCollisionGroup(-2)
 
         if (!this.scene.anims.exists('rocket-turn'))
@@ -47,7 +47,7 @@ export default class Rocket extends Obstacle {
                 undefined,
                 { isStatic: true }
             )
-            .setDepth(DEPTH.OBJECT_MEDIUM)
+            .setDepth(DEPTH.OBJECT_HIGH)
             .setScale((2 * scene.cameras.main.height) / 1600)
             .setRectangle(
                 (85 * scene.cameras.main.width) / 3200,
@@ -71,8 +71,8 @@ export default class Rocket extends Obstacle {
 
         this.alert = this.scene.add
             .sprite(x, y, SPRITE.ROCKET_ALERT)
-            .setDepth(DEPTH.OBJECT_MEDIUM)
-            .setScale((2.5 * scene.cameras.main.width) / 3200)
+            .setDepth(DEPTH.OBJECT_HIGH)
+            .setScale(2.5)
 
         if (!this.scene.anims.exists('alert'))
             this.scene.anims.create({
@@ -99,8 +99,7 @@ export default class Rocket extends Obstacle {
                 if (player.y > this.alert.y) this.alert.y += d
                 else if (player.y < this.alert.y) this.alert.y -= d
             }
-            this.alert.x =
-                this.scene.cameras.main.scrollX + (3150 * this.scene.cameras.main.width) / 3200
+            this.alert.x = this.scene.cameras.main.scrollX + 3000
             this.rect.y = this.fire.y = this.alert.y
             this.rect.x = this.alert.x + (100 * this.scene.cameras.main.width) / 3200
             this.fire.x = this.alert.x + (180 * this.scene.cameras.main.width) / 3200

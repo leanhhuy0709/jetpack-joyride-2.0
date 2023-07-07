@@ -15,6 +15,7 @@ import TileMap from '../object/background/TileMap'
 import UserData from '../object/shop/UserData'
 import { colors, tileMaps } from './MenuScene'
 
+
 export default class GamePlayScene extends Phaser.Scene {
     private player: Player
 
@@ -54,26 +55,30 @@ export default class GamePlayScene extends Phaser.Scene {
     }
 
     public preload(): void {
-        //
+        this.load.scenePlugin(
+            'AnimatedTiles',
+            'https://raw.githubusercontent.com/nkholski/phaser-animated-tiles/master/dist/AnimatedTiles.js',
+            'animatedTiles',
+            'animatedTiles'
+        )
     }
 
     public create(): void {
-        this.tileMap = new TileMap(
-            this,
-            tileMaps,
-            colors
-        )
+        this.tileMap = new TileMap(this, tileMaps, colors)
 
         let tmp = Number(localStorage.getItem('highscore'))
 
         if (!tmp) tmp = 0
 
-        this.add.text(2000, 300, `Best: ${Math.floor(tmp)}`, {
-            fontFamily: FONT_NAME,
-            fontSize: 60,
-            color: '#ffffff',
-            fontStyle: 'bold',
-        }).setDepth(DEPTH.OBJECT_LOW).setStroke('#000000', 5)
+        this.add
+            .text(2000, 300, `Best: ${Math.floor(tmp)}`, {
+                fontFamily: FONT_NAME,
+                fontSize: 60,
+                color: '#ffffff',
+                fontStyle: 'bold',
+            })
+            .setDepth(DEPTH.OBJECT_LOW)
+            .setStroke('#000000', 5)
 
         this.cameras.main.shake(400, new Phaser.Math.Vector2(0.01, 0.01))
 
@@ -144,6 +149,9 @@ export default class GamePlayScene extends Phaser.Scene {
     }
 
     public update(_time: number, delta: number): void {
+        const scene = this as unknown as AnimatedScene
+        scene.animatedTiles.updateAnimatedTiles()
+
         this.matter.world.update(_time, delta)
 
         this.tileMap.update()
@@ -238,7 +246,7 @@ export default class GamePlayScene extends Phaser.Scene {
             )
         }
     }
-    
+
     private evaluateSpeed(score: number, init: number): number {
         return Math.log10((0.5 * score) / 1000 + 1) + init
     }

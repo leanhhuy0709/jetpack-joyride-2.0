@@ -21,7 +21,7 @@ export default class TileMap {
 
         for (let i = 0; i < maps.length; i++) {
             this.maps.push(this.scene.make.tilemap({ key: maps[i] }))
-            
+
             const tmp = this.maps[i].addTilesetImage('ground', IMAGE.TILESET)
             if (tmp) this.tilesets.push(tmp)
             const rect = scene.add
@@ -49,6 +49,13 @@ export default class TileMap {
             }
 
             this.position += (100 * 160 * scene.cameras.main.width) / 3200
+
+            
+            for (let i = 0; i < maps.length; i++) {
+                const scene = this.scene as unknown as AnimatedScene
+                if (this.maps[i])
+                    scene.animatedTiles.init(this.maps[i])
+            }
         }
     }
 
